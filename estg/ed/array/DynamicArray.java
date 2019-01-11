@@ -127,6 +127,7 @@ public class DynamicArray<T> {
       return this.next == 0;
   }
 
+  @Override
   public String toString(){
       StringBuilder stb = new StringBuilder();
 

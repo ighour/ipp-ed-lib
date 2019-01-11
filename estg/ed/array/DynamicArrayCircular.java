@@ -60,7 +60,7 @@ public class DynamicArrayCircular<T> {
    * @throws IndexOutOfBoundsException 
    */
   public void add(T element, int virtualIndex) throws IndexOutOfBoundsException {
-    //Check if virtualIndex is valid
+    //Check if virtualIndex is valid (0 to new position at end)
     if(virtualIndex < 0 || virtualIndex > this.size())
       throw new IndexOutOfBoundsException("Index " + virtualIndex + " is out of bounds!");
     
@@ -96,8 +96,8 @@ public class DynamicArrayCircular<T> {
    * @throws IndexOutOfBoundsException 
    */
   public T remove(int virtualIndex) throws IndexOutOfBoundsException {
-    //Check if virtualIndex is valid
-    if(virtualIndex < 0 || virtualIndex > this.size())
+    //Check if virtualIndex is valid (0 to last position at end)
+    if(virtualIndex < 0 || virtualIndex > this.size() - 1)
       throw new IndexOutOfBoundsException("Index " + virtualIndex + " is out of bounds!");
     
     //Get internal index
@@ -135,8 +135,8 @@ public class DynamicArrayCircular<T> {
    * @throws IndexOutOfBoundsException 
    */
   public T get(int virtualIndex) throws IndexOutOfBoundsException {
-    //Check if virtualIndex is valid
-    if(virtualIndex < 0 || virtualIndex > this.size())
+    //Check if virtualIndex is valid (0 to last position at end)
+    if(virtualIndex < 0 || virtualIndex > this.size() - 1)
       throw new IndexOutOfBoundsException("Index " + virtualIndex + " is out of bounds!");
     
     //Get internal index
@@ -154,6 +154,7 @@ public class DynamicArrayCircular<T> {
     return this.rear == this.front;
   }
     
+  @Override
   public String toString(){
     StringBuilder stb = new StringBuilder();
 
