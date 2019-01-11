@@ -8,7 +8,7 @@ package estg.ed.interfaces;
 import estg.ed.exceptions.EmptyCollectionException;
 
 /**
- *
+ * Contract for Stacks
  * @author igu
  * @param <T>
  */

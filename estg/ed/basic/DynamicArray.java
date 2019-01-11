@@ -16,7 +16,7 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
   /**
    * Array default size.
    */
-  static final int DEFAULT_SIZE = 20;
+  private static final int DEFAULT_SIZE = 20;
   
   /**
    * Array to store data.
@@ -48,6 +48,7 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
    * Add an element to desired index.
    * Index need to be between 0 and next position.
    * Increases array size if needed.
+   * Push elements in array if is not the next available index
    * Throws IndexOutOfBoundsException if index is invalid.
    * @param element
    * @param index
@@ -77,6 +78,7 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
   /**
    * Remove an element from desired index.
    * Index need to be between 0 and next position.
+   * Pull elements in array if is not the last index
    * Throws IndexOutOfBoundsException if index is invalid.
    * @param index
    * @return 

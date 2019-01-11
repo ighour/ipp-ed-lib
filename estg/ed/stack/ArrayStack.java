@@ -11,7 +11,8 @@ import estg.ed.interfaces.CollectionArrayContract;
 import estg.ed.interfaces.StackADT;
 
 /**
- *
+ * Stack implemented with array.
+ * Using already implemented dynamic array.
  * @author igu
  * @param <T>
  */

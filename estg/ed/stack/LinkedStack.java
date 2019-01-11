@@ -12,7 +12,8 @@ import estg.ed.interfaces.CollectionLinkedContract;
 import estg.ed.interfaces.StackADT;
 
 /**
- *
+ * Stack implemented with linked list.
+ * Using already implemented linked list.
  * @author igu
  * @param <T>
  */
