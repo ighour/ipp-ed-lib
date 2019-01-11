@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estg.ed.basic;
-
-import estg.ed.interfaces.CollectionArrayContract;
+package estg.ed.array;
 
 /**
  * Circular array which dynamically expands when needed
  * @author igu
  * @param <T>
  */
-public class DynamicArrayCircular<T> implements CollectionArrayContract<T> {
+public class DynamicArrayCircular<T> {
 
   /**
    * Array default size.
@@ -61,7 +59,6 @@ public class DynamicArrayCircular<T> implements CollectionArrayContract<T> {
    * @param virtualIndex external index
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public void add(T element, int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid
     if(virtualIndex < 0 || virtualIndex > this.size())
@@ -98,7 +95,6 @@ public class DynamicArrayCircular<T> implements CollectionArrayContract<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public T remove(int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid
     if(virtualIndex < 0 || virtualIndex > this.size())
@@ -138,7 +134,6 @@ public class DynamicArrayCircular<T> implements CollectionArrayContract<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public T get(int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid
     if(virtualIndex < 0 || virtualIndex > this.size())
@@ -151,17 +146,14 @@ public class DynamicArrayCircular<T> implements CollectionArrayContract<T> {
     return this.collection[index];
   }
 
-  @Override
   public int size() {
     return (this.rear - this.front + this.collection.length) % this.collection.length;
   }
 
-  @Override
   public boolean isEmpty() {
     return this.rear == this.front;
   }
     
-  @Override
   public String toString(){
     StringBuilder stb = new StringBuilder();
 

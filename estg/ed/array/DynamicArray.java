@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estg.ed.basic;
-
-import estg.ed.interfaces.CollectionArrayContract;
+package estg.ed.array;
 
 /**
  * Dynamically expands array when needed
  * @author igu
  * @param <T>
  */
-public class DynamicArray<T> implements CollectionArrayContract<T> {
+public class DynamicArray<T> {
   /**
    * Array default size.
    */
@@ -54,7 +52,6 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
    * @param index
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public void add(T element, int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index > this.next)
@@ -84,7 +81,6 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public T remove(int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index >= this.next)
@@ -115,7 +111,6 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
-  @Override
   public T get(int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index >= this.next)
@@ -124,17 +119,14 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
     return this.collection[index];
   }
 
-  @Override
   public int size() {
       return this.next;
   }
 
-  @Override
   public boolean isEmpty() {
       return this.next == 0;
   }
 
-  @Override
   public String toString(){
       StringBuilder stb = new StringBuilder();
 

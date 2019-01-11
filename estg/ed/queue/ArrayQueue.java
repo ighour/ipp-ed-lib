@@ -5,9 +5,8 @@
  */
 package estg.ed.queue;
 
-import estg.ed.basic.DynamicArrayCircular;
+import estg.ed.array.DynamicArrayCircular;
 import estg.ed.exceptions.EmptyCollectionException;
-import estg.ed.interfaces.CollectionArrayContract;
 import estg.ed.interfaces.QueueADT;
 
 /**
@@ -21,7 +20,7 @@ public class ArrayQueue<T> implements QueueADT<T> {
   /**
    * Circular dynamic array to store data.
    */
-  CollectionArrayContract<T> array;
+  DynamicArrayCircular<T> array;
   
   /**
    * Instantiate the queue using a circular dynamic array.

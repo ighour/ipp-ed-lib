@@ -5,103 +5,134 @@
  */
 package estg.ed.stack;
 
-import estg.ed.basic.LinkedList;
-import estg.ed.exceptions.ElementNotFoundException;
 import estg.ed.exceptions.EmptyCollectionException;
-import estg.ed.interfaces.CollectionLinkedContract;
 import estg.ed.interfaces.StackADT;
+import estg.ed.nodes.LinearNode;
 
 /**
  * Stack implemented with linked list.
- * Using already implemented linked list.
- * @author igu
+ * Using already implemented linked list. * @author igu
  * @param <T>
  */
 public class LinkedStack<T> implements StackADT<T> {
-  
+
   /**
-   * Linked list to store data.
+   * Sentinel node of stack.
    */
-  CollectionLinkedContract<T> linked;
+  protected LinearNode<T> sentinel;
   
   /**
-   * Instantiate the stack using a linked list.
+   * Elements in stack.
+   */
+  protected int count;
+  
+  /**
+   * Instantiate the stack with a sentinel node.
    */
   public LinkedStack(){
-    this.linked = new LinkedList<>();
+    this.sentinel = new LinearNode<>();
+    this.count = 0;
   }
 
   /** 
    * Adds one element to the top of this stack.
-   * Inserts on internal linked list at first position.
+   * Inserts as sentinel next node.
    * @param element element to be pushed onto stack
    */
   @Override
   public void push(T element) {
-    this.linked.addToFront(element);
+    LinearNode<T> newNode = new LinearNode<>(element);
+    
+    //Insert element
+    newNode.next = this.sentinel.next;
+    this.sentinel.next = newNode;
+    
+    this.count++;
   }
 
   /** 
    * Removes and returns the top element from this stack.
-   * Removes from internal linked list from first position.
-   * Throws EmptyCollectionException if first position is not found (list is empty).
+   * Removes from first node after sentinel.
+   * Throws EmptyCollectionException if is empty.
    * @return T element removed from the top of the stack
    * @throws estg.ed.exceptions.EmptyCollectionException
    */
   @Override
   public T pop() throws EmptyCollectionException {
-    try {
-      return this.linked.removePosition(0);
-      
-    } catch (ElementNotFoundException ex) {
+    if(this.count == 0)
       throw new EmptyCollectionException("Stack is empty!");
-    }
+
+    //Get top element data
+    T element = this.sentinel.next.data;
+    
+    //Remove top element
+    this.sentinel.next = this.sentinel.next.next;
+    
+    this.count--;
+    
+    //Return element
+    return element;
   }
 
   /** 
    * Returns without removing the top element of this stack.
-   * Returns from internal linked list from first position.
-   * Throws EmptyCollectionException if first position is not found (list is empty).
+   * Returns from first node after sentinel.
+   * Throws EmptyCollectionException if is empty.
    * @return T element on top of the stack
    * @throws estg.ed.exceptions.EmptyCollectionException
    */
   @Override
   public T peek() throws EmptyCollectionException {
-    try {
-      return this.linked.get(0);
-      
-    } catch (ElementNotFoundException ex) {
+    if(this.count == 0)
       throw new EmptyCollectionException("Stack is empty!");
-    }
+
+    //Return element
+    return this.sentinel.next.data;
   }
 
   /** 
    * Returns true if this stack contains no elements.
-   * Returns result from internal linked list.
    * @return boolean whether or not this stack is empty
    */
   @Override
   public boolean isEmpty() {
-    return this.linked.isEmpty();
+    return this.count == 0;
   }
 
   /** 
    * Returns the number of elements in this stack.
-   * Returns result from internal linked list.
    * @return int number of elements in this stack
    */
   @Override
   public int size() {
-    return this.linked.size();
+    return this.count;
   }
   
   /** 
    * Returns a string representation of this stack.
-   * Returns result from internal linked list.
    * @return String representation of this stack
    */
   @Override
   public String toString() {
-    return this.linked.toString();
+    LinearNode<T> currentNode = this.sentinel.next;
+
+    StringBuilder stb = new StringBuilder();
+
+    stb.append("[");
+
+    while(currentNode != null){
+        T content = currentNode.data;
+
+        stb.append("[").append(content.toString()).append("]");
+
+        currentNode = currentNode.next;
+
+        if(currentNode != null)
+            stb.append(",");
+    }
+
+    stb.append("]");
+
+    return stb.toString();
   }
 }
