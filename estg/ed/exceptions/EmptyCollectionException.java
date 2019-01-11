@@ -6,14 +6,14 @@
 package estg.ed.exceptions;
 
 /**
- * Element was not found.
+ * Collection is empty.
  * @author igu
  */
-public class ElementNotFoundException extends Exception {
-    public ElementNotFoundException(){
+public class EmptyCollectionException extends Exception {
+    public EmptyCollectionException(){
         super();
     }
-    public ElementNotFoundException(String message){
+    public EmptyCollectionException(String message){
         super(message);
     }
 }

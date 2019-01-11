@@ -6,28 +6,28 @@
 package estg.ed.nodes;
 
 /**
- * Node with reference to next node
+ * Node with reference to next node.
  * @author igu
  * @param <T>
  */
 public class LinearNode<T> {
   /**
-   * Node data
+   * Node data.
    */
   public T data;
   
   /**
-   * Next node reference
+   * Next node reference.
    */
   public LinearNode<T> next;
 
   /**
-   * Create a node without data
+   * Create a node without data.
    */
   public LinearNode(){}
 
   /**
-   * Create a node with data
+   * Create a node with data.
    * @param data 
    */
   public LinearNode(T data){

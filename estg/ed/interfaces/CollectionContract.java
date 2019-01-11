@@ -6,25 +6,25 @@
 package estg.ed.interfaces;
 
 /**
- * Basic operations of a collection
+ * Basic operations of a collection.
  * @author ighour
  * @param <T>
  */
 public interface CollectionContract<T> {   
   /**
-   * Return collection size
+   * Return collection size.
    * @return 
    */
   public int size();
 
   /**
-   * Check if collection is empty
+   * Check if collection is empty.
    * @return 
    */
   public boolean isEmpty();
 
   /**
-   * Prints the collection
+   * Prints the collection.
    * @return 
    */
   @Override

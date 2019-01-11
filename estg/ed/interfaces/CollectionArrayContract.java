@@ -6,13 +6,13 @@
 package estg.ed.interfaces;
 
 /**
- * Basic operations of an array collection
+ * Basic operations of an array collection.
  * @author ighour
  * @param <T>
  */
 public interface CollectionArrayContract<T> extends CollectionContract<T> {   
   /**
-   * Add an element to desired index
+   * Add an element to desired index.
    * @param element 
    * @param index 
    * @throws IndexOutOfBoundsException 
@@ -20,7 +20,7 @@ public interface CollectionArrayContract<T> extends CollectionContract<T> {
   public void add(T element, int index) throws IndexOutOfBoundsException;
 
   /**
-   * Remove an element from desired index
+   * Remove an element from desired index.
    * @param index
    * @return 
    * @throws IndexOutOfBoundsException 
@@ -28,7 +28,7 @@ public interface CollectionArrayContract<T> extends CollectionContract<T> {
   public T remove(int index) throws IndexOutOfBoundsException;
 
   /**
-   * Get an element from desired index
+   * Get an element from desired index.
    * @param index
    * @return 
    * @throws IndexOutOfBoundsException 

@@ -14,29 +14,29 @@ import estg.ed.interfaces.CollectionArrayContract;
  */
 public class DynamicArray<T> implements CollectionArrayContract<T> {
   /**
-   * Array default size
+   * Array default size.
    */
   static final int DEFAULT_SIZE = 20;
   
   /**
-   * Array to store data
+   * Array to store data.
    */
   T[] collection;
   
   /**
-   * Reference to next empty position in array
+   * Reference to next empty position in array.
    */
   int next;
 
   /**
-   * Generates a dynamic array with default size
+   * Generates a dynamic array with default size.
    */
   public DynamicArray(){
     this(DEFAULT_SIZE);
   }
 
   /**
-   * Generates a dynamic array with desired size
+   * Generates a dynamic array with desired size.
    * @param size
    */
   public DynamicArray(int size){
@@ -45,8 +45,10 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
   }
 
   /**
-   * Add an element to desired index
-   * Index need to be between 0 and next position
+   * Add an element to desired index.
+   * Index need to be between 0 and next position.
+   * Increases array size if needed.
+   * Throws IndexOutOfBoundsException if index is invalid.
    * @param element
    * @param index
    * @throws IndexOutOfBoundsException 
@@ -73,8 +75,9 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
   }
 
   /**
-   * Remove an element from desired index
-   * Index need to be between 0 and next position
+   * Remove an element from desired index.
+   * Index need to be between 0 and next position.
+   * Throws IndexOutOfBoundsException if index is invalid.
    * @param index
    * @return 
    * @throws IndexOutOfBoundsException 
@@ -103,8 +106,9 @@ public class DynamicArray<T> implements CollectionArrayContract<T> {
   }
 
   /**
-   * Get an element from desired index
-   * Index need to be between 0 and next position
+   * Get an element from desired index.
+   * Index need to be between 0 and next position.
+   * Throws IndexOutOfBoundsException if index is invalid.
    * @param index
    * @return 
    * @throws IndexOutOfBoundsException 

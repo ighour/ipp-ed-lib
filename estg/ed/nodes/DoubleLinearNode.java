@@ -6,33 +6,33 @@
 package estg.ed.nodes;
 
 /**
- * Node with reference to next and previous nodes
+ * Node with reference to next and previous nodes.
  * @author igu
  * @param <T>
  */
 public class DoubleLinearNode<T> {
   /**
-   * Node data
+   * Node data.
    */
   public T data;
   
   /**
-   * Next node reference
+   * Next node reference.
    */
   public DoubleLinearNode<T> next;
   
   /**
-   * Previous node reference
+   * Previous node reference.
    */
   public DoubleLinearNode<T> previous;
 
   /**
-   * Create a node without data
+   * Create a node without data.
    */
   public DoubleLinearNode(){}
 
   /**
-   * Create a node with data
+   * Create a node with data.
    * @param data 
    */
   public DoubleLinearNode(T data){

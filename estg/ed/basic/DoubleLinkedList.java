@@ -8,7 +8,6 @@ package estg.ed.basic;
 import estg.ed.exceptions.ElementNotFoundException;
 import estg.ed.interfaces.CollectionDoubleLinkedContract;
 import estg.ed.nodes.DoubleLinearNode;
-import estg.ed.nodes.LinearNode;
 
 /**
  * Linked list of collection elements
@@ -17,22 +16,22 @@ import estg.ed.nodes.LinearNode;
  */
 public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   /**
-   * Front sentinel of list
+   * Front sentinel of list.
    */
   protected DoubleLinearNode<T> frontSentinel;
   
   /**
-   * Rear sentinel of list
+   * Rear sentinel of list.
    */
   protected DoubleLinearNode<T> rearSentinel;
   
   /**
-   * List count
+   * List count.
    */
   protected int count;
   
   /**
-   * Creates a double linked list
+   * Creates a double linked list.
    */
   public DoubleLinkedList(){
     this.frontSentinel = new DoubleLinearNode<>();
@@ -43,7 +42,8 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
   
   /**
-   * Add an element to front, after front sentinel node
+   * Add an element to front, after front sentinel node.
+   * Traversing list from frontSentinel to rearSentinel.
    * @param element 
    */
   @Override
@@ -63,7 +63,8 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
   
   /**
-   * Add an element to rear, after all elements
+   * Add an element to rear, after all elements.
+   * Traversing list from rearSentinel to frontSentinel.
    * @param element 
    */
   @Override
@@ -83,7 +84,9 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
   
   /**
-   * Add an element after another element
+   * Add an element after another element.
+   * Traversing list from frontSentinel to rearSentinel.
+   * Throws ElementNotFoundException if target is not in list.
    * @param element 
    * @param target 
    * @throws ElementNotFoundException 
@@ -114,7 +117,9 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
   
   /**
-   * Add an element before another element
+   * Add an element before another element.
+   * Traversing list from frontSentinel to rearSentinel.
+   * Throws ElementNotFoundException if target is not in list.
    * @param element 
    * @param target 
    * @throws ElementNotFoundException 
@@ -145,7 +150,9 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
 
   /**
-   * Remove an element
+   * Remove an element.
+   * Traversing list from frontSentinel to rearSentinel.
+   * Throws ElementNotFoundException if element is not in list.
    * @param element
    * @return 
    * @throws ElementNotFoundException 
@@ -173,7 +180,9 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
   
   /**
-   * Remove an element from desired position
+   * Remove an element from desired position.
+   * Traversing list from frontSentinel to rearSentinel.
+   * Throws ElementNotFoundException if position is invalid.
    * @param position
    * @return 
    * @throws ElementNotFoundException 
@@ -202,7 +211,9 @@ public class DoubleLinkedList<T> implements CollectionDoubleLinkedContract<T> {
   }
 
   /**
-   * Get an element from desired position
+   * Get an element from desired position.
+   * Traversing list from frontSentinel to rearSentinel.
+   * Throws ElementNotFoundException if position is invalid.
    * @param position
    * @return 
    * @throws ElementNotFoundException 

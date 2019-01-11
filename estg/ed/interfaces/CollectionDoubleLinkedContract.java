@@ -8,13 +8,13 @@ package estg.ed.interfaces;
 import estg.ed.exceptions.ElementNotFoundException;
 
 /**
- * Basic operations of an array collection
+ * Basic operations of an array collection.
  * @author ighour
  * @param <T>
  */
 public interface CollectionDoubleLinkedContract<T> extends CollectionLinkedContract<T> {   
   /**
-   * Add an element before another element
+   * Add an element before another element.
    * @param element 
    * @param target 
    * @throws ElementNotFoundException 

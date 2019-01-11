@@ -10,23 +10,23 @@ import estg.ed.interfaces.CollectionLinkedContract;
 import estg.ed.nodes.LinearNode;
 
 /**
- * Linked list of collection elements
+ * Linked list of collection elements.
  * @author igu
  * @param <T>
  */
 public class LinkedList<T> implements CollectionLinkedContract<T> {
   /**
-   * Front sentinel of list
+   * Front sentinel of list.
    */
   protected LinearNode<T> frontSentinel;
   
   /**
-   * List count
+   * List count.
    */
   protected int count;
   
   /**
-   * Creates a linked list
+   * Creates a linked list.
    */
   public LinkedList(){
     this.frontSentinel = new LinearNode<>();
@@ -34,7 +34,7 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
   
   /**
-   * Add an element to front, after front sentinel node
+   * Add an element to front, after front sentinel node.
    * @param element 
    */
   @Override
@@ -51,7 +51,8 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
   
   /**
-   * Add an element to rear, after all elements
+   * Add an element to rear, after all elements.
+   * Traversing from front sentinel node to the end.
    * @param element 
    */
   @Override
@@ -73,7 +74,9 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
   
   /**
-   * Add an element after another element
+   * Add an element after another element.
+   * Traversing from front sentinel node to the end.
+   * Throws ElementNotFoundException if target is not in list.
    * @param element 
    * @param target 
    * @throws ElementNotFoundException 
@@ -101,7 +104,9 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
 
   /**
-   * Remove an element
+   * Remove an element.
+   * Traversing from front sentinel node to the end.
+   * Throws ElementNotFoundException if target is not in list.
    * @param element
    * @return 
    * @throws ElementNotFoundException 
@@ -128,7 +133,9 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
   
   /**
-   * Remove an element from desired position
+   * Remove an element from desired position.
+   * Traversing from front sentinel node to the end.
+   * Throws ElementNotFoundException if position is invalid.
    * @param position
    * @return 
    * @throws ElementNotFoundException 
@@ -156,7 +163,9 @@ public class LinkedList<T> implements CollectionLinkedContract<T> {
   }
 
   /**
-   * Get an element from desired position
+   * Get an element from desired position.
+   * Traversing from front sentinel node to the end.
+   * Throws ElementNotFoundException if position is invalid.
    * @param position
    * @return 
    * @throws ElementNotFoundException 
