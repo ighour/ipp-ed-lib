@@ -5,12 +5,14 @@
  */
 package estg.ed.array;
 
+import estg.ed.interfaces.DynamicArrayContract;
+
 /**
- * Circular array which dynamically expands when needed
+ * Implements a circular dynamic array which expands when needed.
  * @author igu
  * @param <T>
  */
-public class DynamicArrayCircular<T> {
+public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
 
   /**
    * Array default size.
@@ -53,12 +55,13 @@ public class DynamicArrayCircular<T> {
    * Add an element to desired index.
    * Index need to be between 0 and array size.
    * Increases array size if needed.
-   * Push elements in array if is not the rear index
+   * Push elements in array if is not the rear index.
    * Throws IndexOutOfBoundsException if virtualIndex is invalid.
    * @param element
    * @param virtualIndex external index
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public void add(T element, int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid (0 to new position at end)
     if(virtualIndex < 0 || virtualIndex > this.size())
@@ -89,12 +92,13 @@ public class DynamicArrayCircular<T> {
   /**
    * Remove an element from desired index.
    * Index need to be between 0 and array size.
-   * Pull elements in array if is not the last index
+   * Pull elements in array if is not the last index.
    * Throws IndexOutOfBoundsException if index is invalid.
    * @param virtualIndex external index
    * @return 
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public T remove(int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid (0 to last position at end)
     if(virtualIndex < 0 || virtualIndex > this.size() - 1)
@@ -125,6 +129,24 @@ public class DynamicArrayCircular<T> {
 
     return element;
   }
+  
+  /**
+   * Change content of desired index.
+   * Index need to be between 0 and last position.
+   * Throws IndexOutOfBoundsException if index is invalid.
+   * @param element
+   * @param index
+   * @throws IndexOutOfBoundsException 
+   */
+  @Override
+  public void change(T element, int index) throws IndexOutOfBoundsException {
+    //Check if index is allowed
+    if(index < 0 || index >= this.rear)
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");
+
+    //Change content
+    this.collection[index] = element;
+  }
 
   /**
    * Get an element from desired index.
@@ -134,6 +156,7 @@ public class DynamicArrayCircular<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public T get(int virtualIndex) throws IndexOutOfBoundsException {
     //Check if virtualIndex is valid (0 to last position at end)
     if(virtualIndex < 0 || virtualIndex > this.size() - 1)
@@ -146,14 +169,30 @@ public class DynamicArrayCircular<T> {
     return this.collection[index];
   }
 
+  /**
+   * Get length of array.
+   * Only counts valid indexes between front and rear-1.
+   * @return 
+   */
+  @Override
   public int size() {
     return (this.rear - this.front + this.collection.length) % this.collection.length;
   }
 
+  /**
+   * Check if array is empty.
+   * Only counts valid indexes between front and rear-1.
+   * @return 
+   */
+  @Override
   public boolean isEmpty() {
     return this.rear == this.front;
   }
     
+  /**
+   * Returns the string representation of the dynamic array.
+   * @return a string representation of the dynamic array
+   */
   @Override
   public String toString(){
     StringBuilder stb = new StringBuilder();

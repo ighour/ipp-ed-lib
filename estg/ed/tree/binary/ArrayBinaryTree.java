@@ -5,80 +5,79 @@
  */
 package estg.ed.tree.binary;
 
+import estg.ed.array.DynamicArrayCircular;
 import estg.ed.exceptions.ElementNotFoundException;
 import estg.ed.exceptions.EmptyCollectionException;
 import estg.ed.interfaces.BinaryTreeADT;
+import estg.ed.interfaces.DynamicArrayContract;
 import estg.ed.interfaces.QueueADT;
 import estg.ed.interfaces.UnorderedListADT;
 import estg.ed.list.UnorderedArrayList;
-import estg.ed.nodes.BinaryTreeNode;
 import estg.ed.queue.ArrayQueue;
 import java.util.Iterator;
 
 /**
- * Binary tree implementation with linked nodes.
+ * Binary tree implementation with circular dynamic array.
+ * Using already implemented circular dynamic array.
  * @author igu
  * @param <T>
  */
-public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
+public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
   
   /**
-   * Count elements in tree
+   * Circular dynamic array to store data.
    */
-  protected int count;
-  
-  /**
-   * Tree root
-   */
-  protected BinaryTreeNode<T> root;
+  DynamicArrayContract<T> array;
   
   /**
    * Instantiates a binary tree without root.
    */
-  public LinkedBinaryTree(){
-    this.count = 0;
-    this.root = null;
+  public ArrayBinaryTree(){
+    this.array = new DynamicArrayCircular();
   }
   
   /**
    * Instantiates a binary tree with root.
    * @param root
    */
-  public LinkedBinaryTree(T root){
-    this.count = 1;
-    this.root = new BinaryTreeNode<>(root);
+  public ArrayBinaryTree(T root){
+    this.array = new DynamicArrayCircular();
+    this.array.add(root, 0);
   }
 
   /**
    * Returns a reference to the root element.
+   * Uses internal circular dynamic array get() method on first position.
    * Throws EmptyCollectionException if root is null.
    * @return a reference to the root
    * @throws estg.ed.exceptions.EmptyCollectionException
    */
   @Override
   public T getRoot() throws EmptyCollectionException {
-    if(this.root == null)
+    if(this.array.size() == 0)
       throw new EmptyCollectionException("Tree is empty!");
     
-    return this.root.data;
+    return this.array.get(0);
   }
 
   /**
    * Returns true if this binary tree is empty and false otherwise.
+   * Uses internal circular dynamic array isEmpty() method.
    * @return true if this binary tree is empty
    */
   @Override
   public boolean isEmpty() {
-    return this.count == 0;
+    return this.array.isEmpty();
   }
 
   /**
    * Returns the number of elements in this binary tree.
+   * Uses internal circular dynamic array size() method.
    * @return the integer number of elements in this tree
    */
   @Override
   public int size() {
-    return this.count;
+    return this.array.size();
   }
 
   /**
@@ -88,8 +87,8 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
    */
   @Override
   public boolean contains(T targetElement) {
-    //Search node in root tree    
-    return this.findNode(targetElement, this.root) != null;
+    //Search element in internal array from root
+    return this.findElement(targetElement, 0) >= 0;
   }
 
   /**
@@ -101,43 +100,49 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
    */
   @Override
   public T find(T targetElement) throws ElementNotFoundException {
-    //Search node in root tree   
-    BinaryTreeNode<T> found = this.findNode(targetElement, this.root);
+    //Search element in internal array from root 
+    int found = this.findElement(targetElement, 0);
     
-    if(found == null)
+    if(found < 0)
       throw new ElementNotFoundException("Element was not found.");
     
-    return found.data;
+    return this.array.get(found);
   }
   
   /**
    * Search for targetElem in (sub)tree.
    * Uses recursion.
+   * Uses internal circular dynamic array to get elements.
    * @param targetElem
-   * @param currentNode
+   * @param currentIndex
    * @return 
    */
-  private BinaryTreeNode<T> findNode(T targetElem, BinaryTreeNode<T> currentNode){
-    //Node is null
-    if(currentNode == null)
-      return null;
+  private int findElement(T targetElem, int currentIndex){
+    //Search element
+    try{
+      //Found Index
+      if(this.array.get(currentIndex).equals(targetElem))
+        return currentIndex;
+    }
+    catch(IndexOutOfBoundsException e){
+      //Index is invalid
+      return -1;
+    }
     
-    //Found targetElem
-    if(currentNode.data.equals(targetElem))
-      return currentNode;
+    //Search in left children
+    int leftIndex = this.findElement(targetElem, currentIndex * 2 + 1);
+    if(leftIndex >= 0)
+      //Found
+      return leftIndex;
     
-    //Search in left tree
-    BinaryTreeNode<T> leftNode = this.findNode(targetElem, currentNode.left);
-    if(leftNode != null)
-      return leftNode;
-    
-    //Search in right tree
-    BinaryTreeNode<T> rightNode = this.findNode(targetElem, currentNode.right);
-    if(rightNode != null)
-      return rightNode;
+    //Search in right children
+    int rightIndex = this.findElement(targetElem, currentIndex * 2 + 2);
+    if(rightIndex >= 0)
+      //Found
+      return rightIndex;
     
     //Not found
-    return null;
+    return -1;
   }
   
   /**
@@ -177,18 +182,26 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     UnorderedListADT<T> list = new UnorderedArrayList<>();
     
     //Start recursion in root
-    inorder(list, this.root);
+    inorder(list, 0);
     
     return list.iterator();
   }
   
-  private void inorder(UnorderedListADT<T> list, BinaryTreeNode<T> node){
-    if(node == null)
-      return;
+  private void inorder(UnorderedListADT<T> list, int index){
+    //Check left child
+    int leftIndex = index * 2 + 1;
+    if(leftIndex < this.array.size())
+      //Enter left child
+      this.inorder(list, leftIndex);
+
+    //Add current to list
+    list.addToRear(this.array.get(index));
     
-    inorder(list, node.left);
-    list.addToRear(node.data);
-    inorder(list, node.right);
+    //Check right child
+    int rightChild = index * 2 + 2;
+    if(rightChild < this.array.size())
+      //Enter right child
+      this.inorder(list, rightChild);
   }
 
   /**
@@ -201,18 +214,26 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     UnorderedListADT<T> list = new UnorderedArrayList<>();
     
     //Start recursion in root
-    preorder(list, this.root);
+    preorder(list, 0);
     
     return list.iterator();
   }
   
-  private void preorder(UnorderedListADT<T> list, BinaryTreeNode<T> node){
-    if(node == null)
-      return;
+  private void preorder(UnorderedListADT<T> list, int index){
+    //Add current to list
+    list.addToRear(this.array.get(index));
     
-    list.addToRear(node.data);
-    preorder(list, node.left);
-    preorder(list, node.right);
+    //Check left child
+    int leftIndex = index * 2 + 1;
+    if(leftIndex < this.array.size())
+      //Enter left child
+      this.preorder(list, leftIndex);
+
+    //Check right child
+    int rightChild = index * 2 + 2;
+    if(rightChild < this.array.size())
+      //Enter right child
+      this.preorder(list, rightChild);
   }
 
   /**
@@ -225,18 +246,26 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     UnorderedListADT<T> list = new UnorderedArrayList<>();
     
     //Start recursion in root
-    postorder(list, this.root);
+    postorder(list, 0);
     
     return list.iterator();
   }
   
-  private void postorder(UnorderedListADT<T> list, BinaryTreeNode<T> node){
-    if(node == null)
-      return;
+  private void postorder(UnorderedListADT<T> list, int index){        
+    //Check left child
+    int leftIndex = index * 2 + 1;
+    if(leftIndex < this.array.size())
+      //Enter left child
+      this.postorder(list, leftIndex);
+
+    //Check right child
+    int rightChild = index * 2 + 2;
+    if(rightChild < this.array.size())
+      //Enter right child
+      this.postorder(list, rightChild);
     
-    postorder(list, node.left);
-    postorder(list, node.right);
-    list.addToRear(node.data);
+    //Add current to list
+    list.addToRear(this.array.get(index));
   }
 
   /**
@@ -248,41 +277,39 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
   @Override
   public Iterator<T> iteratorLevelOrder() {
     UnorderedListADT<T> list = new UnorderedArrayList<>();
-    QueueADT<BinaryTreeNode<T>> queue = new ArrayQueue<>();
-    
-    //Is empty
-    if(this.root == null)
-      return list.iterator();
+    QueueADT<Integer> queue = new ArrayQueue<>();
     
     //Start recursion with root in queue
-    queue.enqueue(this.root);
+    queue.enqueue(0);
     levelorder(list, queue);
     
     return list.iterator();
   }
   
-  private void levelorder(UnorderedListADT<T> list, QueueADT<BinaryTreeNode<T>> queue){
+  private void levelorder(UnorderedListADT<T> list, QueueADT<Integer> queue){
     //Try to get from queue
     try {
       //Retrieve first from queue
       //If empty will throw EmptyCollectionException
-      BinaryTreeNode<T> currentNode = queue.dequeue();
+      int index = queue.dequeue();
+      
+      //Retrieve element from internal array
+      //If index is invalid throw IndexOutOfBoundsException
+      T element = this.array.get(index);
 
-      //Add current node data to result
-      list.addToRear(currentNode.data);
+      //Add element to list
+      list.addToRear(element);
 
-      //Add left child of current node to queue
-      if(currentNode.left != null)
-        queue.enqueue(currentNode.left);
+      //Add left child index to queue
+      queue.enqueue(index * 2 + 1);
 
-      //Add right child of current node to queue
-      if(currentNode.right != null)
-        queue.enqueue(currentNode.right);
+      //Add right child index to queue
+      queue.enqueue(index * 2 + 2);
 
       //Proceed in recursion
       this.levelorder(list, queue);
 
-    } catch (EmptyCollectionException ex) {}
+    } catch (EmptyCollectionException | IndexOutOfBoundsException ex) {}
   }
   
 }

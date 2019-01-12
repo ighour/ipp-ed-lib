@@ -8,6 +8,7 @@ package estg.ed.list;
 import estg.ed.array.DynamicArrayCircular;
 import estg.ed.exceptions.ElementNotFoundException;
 import estg.ed.exceptions.EmptyCollectionException;
+import estg.ed.interfaces.DynamicArrayContract;
 import estg.ed.interfaces.ListADT;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
   /**
    * Circular dynamic array to store data.
    */
-  DynamicArrayCircular<T> array;
+  DynamicArrayContract<T> array;
   
   /**
    * Count modifications in list.

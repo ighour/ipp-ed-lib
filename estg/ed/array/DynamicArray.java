@@ -5,12 +5,14 @@
  */
 package estg.ed.array;
 
+import estg.ed.interfaces.DynamicArrayContract;
+
 /**
- * Dynamically expands array when needed
+ * Implements a dynamic array which expands when needed.
  * @author igu
  * @param <T>
  */
-public class DynamicArray<T> {
+public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
    * Array default size.
    */
@@ -46,12 +48,13 @@ public class DynamicArray<T> {
    * Add an element to desired index.
    * Index need to be between 0 and next position.
    * Increases array size if needed.
-   * Push elements in array if is not the next available index
+   * Push elements in array if is not the next available index.
    * Throws IndexOutOfBoundsException if index is invalid.
    * @param element
    * @param index
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public void add(T element, int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index > this.next)
@@ -75,12 +78,13 @@ public class DynamicArray<T> {
   /**
    * Remove an element from desired index.
    * Index need to be between 0 and next position.
-   * Pull elements in array if is not the last index
+   * Pull elements in array if is not the last index.
    * Throws IndexOutOfBoundsException if index is invalid.
    * @param index
    * @return 
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public T remove(int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index >= this.next)
@@ -102,6 +106,24 @@ public class DynamicArray<T> {
 
     return element;
   }
+  
+  /**
+   * Change content of desired index.
+   * Index need to be between 0 and last position.
+   * Throws IndexOutOfBoundsException if index is invalid.
+   * @param element
+   * @param index
+   * @throws IndexOutOfBoundsException 
+   */
+  @Override
+  public void change(T element, int index) throws IndexOutOfBoundsException {
+    //Check if index is allowed
+    if(index < 0 || index >= this.next)
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");
+
+    //Change content
+    this.collection[index] = element;
+  }
 
   /**
    * Get an element from desired index.
@@ -111,6 +133,7 @@ public class DynamicArray<T> {
    * @return 
    * @throws IndexOutOfBoundsException 
    */
+  @Override
   public T get(int index) throws IndexOutOfBoundsException {
     //Check if index is allowed
     if(index < 0 || index >= this.next)
@@ -119,14 +142,30 @@ public class DynamicArray<T> {
     return this.collection[index];
   }
 
+  /**
+   * Get length of array.
+   * Only counts valid indexes between 0 and next-1.
+   * @return 
+   */
+  @Override
   public int size() {
       return this.next;
   }
 
+  /**
+   * Check if array is empty.
+   * Only counts valid indexes between 0 and next-1.
+   * @return 
+   */
+  @Override
   public boolean isEmpty() {
       return this.next == 0;
   }
 
+  /**
+   * Returns the string representation of the dynamic array.
+   * @return a string representation of the dynamic array
+   */
   @Override
   public String toString(){
       StringBuilder stb = new StringBuilder();

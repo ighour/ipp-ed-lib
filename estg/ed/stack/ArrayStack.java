@@ -7,6 +7,7 @@ package estg.ed.stack;
 
 import estg.ed.array.DynamicArray;
 import estg.ed.exceptions.EmptyCollectionException;
+import estg.ed.interfaces.DynamicArrayContract;
 import estg.ed.interfaces.StackADT;
 
 /**
@@ -20,7 +21,7 @@ public class ArrayStack<T> implements StackADT<T> {
   /**
    * Dynamic array to store data.
    */
-  DynamicArray<T> array;
+  DynamicArrayContract<T> array;
   
   /**
    * Instantiate the stack using a dynamic array.
