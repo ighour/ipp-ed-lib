@@ -6,19 +6,19 @@
 package estg.ed.tree.binary;
 
 import estg.ed.exceptions.EmptyCollectionException;
-import estg.ed.interfaces.HeapMinADT;
+import estg.ed.interfaces.HeapMaxADT;
 
 /**
- * Minheap implementation with circular dynamic array.
+ * Maxheap implementation with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
  * @param <T>
  */
-public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
+public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
 
   /**
    * Heapify up an element.
-   * Until element is smaller then parent.
+   * Until element is higher then parent.
    * Uses recursion.
    * @param elementIndex
    */
@@ -35,8 +35,8 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
     T element = this.array.get(elementIndex);
     T parentElement = this.array.get(parentIndex);
     
-    //Check if element is smaller then parentElement
-    if(((Comparable) element).compareTo((Comparable) parentElement) < 0){
+    //Check if element is higher then parentElement
+    if(((Comparable) element).compareTo((Comparable) parentElement) > 0){
       //Exchange elements
       this.array.change(element, parentIndex);
       this.array.change(parentElement, elementIndex);
@@ -47,25 +47,25 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
   }
 
   /**
-   * Removes element with the lowest value from this heap.
+   * Removes element with the highest value from this heap.
    * Throws EmptyCollectionException if heap is empty.
    * Uses removeRoot() method of ArrayHeap.
-   * @return the element with the lowest value from this heap
+   * @return the element with the highest value from this heap
    * @throws estg.ed.exceptions.EmptyCollectionException
    */
   @Override
-  public T removeMin() throws EmptyCollectionException {
+  public T removeMax() throws EmptyCollectionException {
     try {
       return super.removeRoot();
     }
     catch(EmptyCollectionException e){
-      throw new EmptyCollectionException("Minheap is empty!");
+      throw new EmptyCollectionException("Maxheap is empty!");
     }
   }
   
   /**
    * Heapify down an element.
-   * Until parent is smaller or equal to children.
+   * Until parent is higher or equal to children.
    * Uses recursion.
    * @param parentIndex
    */
@@ -100,31 +100,31 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
     
     //Right + Left
     if(right != null && left != null){
-      //Right > Left
-      if(((Comparable) right).compareTo((Comparable) left) > 0){
-        //Parent > Left
-        if(((Comparable) parent).compareTo((Comparable) left) > 0)
+      //Right <= Left
+      if(((Comparable) right).compareTo((Comparable) left) <= 0){
+        //Parent < Left
+        if(((Comparable) parent).compareTo((Comparable) left) < 0)
           this.exchangeParentChild(parentIndex, parent, leftIndex, left);
       }
-      //Left >= Right
+      //Right > Left
       else{
-        //Parent > Right
-        if(((Comparable) parent).compareTo((Comparable) right) > 0)
+        //Parent < Right
+        if(((Comparable) parent).compareTo((Comparable) right) < 0)
           this.exchangeParentChild(parentIndex, parent, rightIndex, right);
       }
     }
     
     //Left
     else if(left != null){
-      //Parent > Left
-      if(((Comparable) parent).compareTo((Comparable) left) > 0)
+      //Parent < Left
+      if(((Comparable) parent).compareTo((Comparable) left) < 0)
         this.exchangeParentChild(parentIndex, parent, leftIndex, left);
     }
     
     //Right
     else if(right != null){
-      //Parent > Right
-      if(((Comparable) parent).compareTo((Comparable) right) > 0)
+      //Parent < Right
+      if(((Comparable) parent).compareTo((Comparable) right) < 0)
         this.exchangeParentChild(parentIndex, parent, rightIndex, right);
     }
   }
@@ -139,19 +139,19 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
   }
   
   /**
-   * Returns a reference to the element with the lowest value in this heap.
+   * Returns a reference to the element with the highest value in this heap.
    * Throws EmptyCollectionException if heap is empty.
    * Uses findRoot() method of ArrayHeap.
-   * @return a reference to the element with the lowest value in this heap
+   * @return a reference to the element with the highest value in this heap
    * @throws estg.ed.exceptions.EmptyCollectionException
    */
   @Override
-  public T findMin() throws EmptyCollectionException {
+  public T findMax() throws EmptyCollectionException {
     try {
       return super.findRoot();
     }
     catch(EmptyCollectionException e){
-      throw new EmptyCollectionException("Minheap is empty!");
+      throw new EmptyCollectionException("Maxheap is empty!");
     }
   }
 }
