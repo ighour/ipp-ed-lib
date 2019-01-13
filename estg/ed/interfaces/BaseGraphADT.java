@@ -29,7 +29,6 @@ public interface BaseGraphADT<T> {
   
   /**
    * Removes an edge between two vertices of this graph.
-   *
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
    * @throws estg.ed.exceptions.ElementNotFoundException
@@ -46,8 +45,7 @@ public interface BaseGraphADT<T> {
   /**
    * Returns a depth first iterator starting with the given vertex.
    * @param startVertex the starting vertex
-   * @return a depth first iterator starting at the
-   * given vertex
+   * @return a depth first iterator starting at the given vertex
    */
   public Iterator iteratorDFS(T startVertex);
 
@@ -55,8 +53,7 @@ public interface BaseGraphADT<T> {
    * Returns an iterator that contains the shortest path between the two vertices.
    * @param startVertex the starting vertex
    * @param targetVertex the ending vertex
-   * @return an iterator that contains the shortest
-   * path between the two vertices
+   * @return an iterator that contains the shortest path between the two vertices
    */
   public Iterator iteratorShortestPath(T startVertex, T targetVertex);
   
