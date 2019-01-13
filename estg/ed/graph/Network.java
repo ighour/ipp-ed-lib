@@ -8,41 +8,44 @@ package estg.ed.graph;
 import estg.ed.array.DynamicArrayCircular;
 import estg.ed.exceptions.ElementNotFoundException;
 import estg.ed.exceptions.EmptyCollectionException;
+import estg.ed.exceptions.VertexIsNotAccessibleException;
 import estg.ed.interfaces.DynamicArrayContract;
-import estg.ed.interfaces.GraphADT;
+import estg.ed.interfaces.NetworkADT;
+import estg.ed.interfaces.PriorityQueueADT;
 import estg.ed.interfaces.QueueADT;
 import estg.ed.interfaces.StackADT;
 import estg.ed.interfaces.UnorderedListADT;
 import estg.ed.list.UnorderedArrayList;
 import estg.ed.queue.ArrayQueue;
 import estg.ed.stack.ArrayStack;
+import estg.ed.tree.binary.ArrayPriorityMinQueue;
 import java.util.Iterator;
 
 /**
- * Implements a directional graph with an adjacency matrix.
+ * Implements a directional network with an adjacency matrix.
  * @author igu
  * @param <T>
  */
-public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
+public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
 
   /**
    * Dynamic array to store adjacent matrix.
    * Uses a dynamic array of dynamic array.
    * Using already implemented circular dynamic array.
    */
-  protected DynamicArrayContract<DynamicArrayContract<Boolean>> adjMatrix;
+  protected DynamicArrayContract<DynamicArrayContract<Double>> adjMatrix;
   
   /**
-  * Instantiates an empty graph.
+  * Instantiates an empty network.
   */
-  public Graph() {
+  public Network() {
     super();
     this.adjMatrix = new DynamicArrayCircular<>();
   }
   
   /**
-   * Adds a vertex to this graph, associating object with vertex.
-   * @param vertex the vertex to be added to this graph
+   * Adds a vertex to this network, associating object with vertex.
+   * @param vertex the vertex to be added to this network
    */
   @Override
   public void addVertex(T vertex) {
@@ -52,21 +55,21 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     //Add vertice to vertices list at end
     this.vertices.add(vertex, this.vertices.size());
 
-    //Set new vertice adjacencys as false
+    //Set new vertice adjacencys as POSITIVE_INFINITY
     int size = this.adjMatrix.size();
     for(int i = 0; i < size; i++){
-      //Set all on new vertex column to false (is the last index of each row)
-      this.adjMatrix.get(i).add(false, size - 1);
+      //Set all on new vertex column to POSITIVE_INFINITY (is the last index of each row)
+      this.adjMatrix.get(i).add(Double.POSITIVE_INFINITY, size - 1);
       
-      //Set all on new vertex row to false (all the last row)
-      this.adjMatrix.get(size - 1).add(false, i);
+      //Set all on new vertex row to POSITIVE_INFINITY (all the last row)
+      this.adjMatrix.get(size - 1).add(Double.POSITIVE_INFINITY, i);
     }
   }
 
   /**
-   * Removes a single vertex with the given value from this graph.
-   * Throws ElementNotFoundException if vertex is not found at graph.
-   * @param vertex the vertex to be removed from this graph
+   * Removes a single vertex with the given value from this network.
+   * Throws ElementNotFoundException if vertex is not found at network.
+   * @param vertex the vertex to be removed from this network
    * @throws estg.ed.exceptions.ElementNotFoundException
    */
   @Override
@@ -90,25 +93,27 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
       this.adjMatrix.get(i).remove(index);
     }
   }
-
+  
   /**
-   * Inserts an edge between two vertices of this graph.
+   * Inserts an edge between two vertices of this network.
+   * Using weights at edges.
    * Edge is directional, so addEdge(A,B) is different from addEdge(B,A).
-   * Throws ElementNotFoundException if vertex is not found at graph.
+   * Throws ElementNotFoundException if vertex is not found at network.
    * Uses changeEdge() method to handle edge update.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
+   * @param weight the weight
    * @throws estg.ed.exceptions.ElementNotFoundException
    */
   @Override
-  public void addEdge(T vertex1, T vertex2) throws ElementNotFoundException {    
-    this.changeEdge(vertex1, vertex2, true);
+  public void addEdge(T vertex1, T vertex2, double weight) throws ElementNotFoundException {    
+    this.changeEdge(vertex1, vertex2, weight);
   }
 
   /**
-   * Removes an edge between two vertices of this graph.
+   * Removes an edge between two vertices of this network.
    * Edge is directional, so removeEdge(A,B) is different from removeEdge(B,A).
-   * Throws ElementNotFoundException if vertex is not found at graph.
+   * Throws ElementNotFoundException if vertex is not found at network.
    * Uses changeEdge() method to handle edge update.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
@@ -116,20 +121,20 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
    */
   @Override
   public void removeEdge(T vertex1, T vertex2) throws ElementNotFoundException {
-    this.changeEdge(vertex1, vertex2, false);
+    this.changeEdge(vertex1, vertex2, Double.POSITIVE_INFINITY);
   }
   
 /**
  * Change edge value.
- * Helper method to change an edge to desired boolean value.
+ * Helper method to change an edge to desired double value.
  * Used by addEdge() and removeEdge() methods.
- * Throws ElementNotFoundException if vertex is not found at graph.
+ * Throws ElementNotFoundException if vertex is not found at network.
  * @param vertex1
  * @param vertex2
  * @param newValue
  * @throws ElementNotFoundException 
  */
-  protected void changeEdge(T vertex1, T vertex2, boolean newValue) throws ElementNotFoundException {
+  protected void changeEdge(T vertex1, T vertex2, double newValue) throws ElementNotFoundException {
     //Get vertices indexes
     int[] indexes = this.getIndex(vertex1, vertex2);
     
@@ -199,7 +204,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
         //Add neighbor to queue and set as visited
         traversalQueue.enqueue(i);
         visited[i] = true;
@@ -268,7 +273,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
         //Add neighbor to stack and set as visited
         traversalStack.push(i);
         visited[i] = true;
@@ -283,6 +288,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
   /**
    * Returns an iterator that contains the shortest path between the two vertices.
    * Similar to iterator BFS, but using cumulative path length.
+   * Preference is to less weighted edge.
    * @param startVertex the starting vertex
    * @param targetVertex the ending vertex
    * @return an iterator that contains the shortest path between the two vertices
@@ -299,8 +305,8 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     if(indexes[0] < 0 || indexes[1] < 0)
       return resultList.iterator();
     
-    //Generate traversal queue
-    QueueADT<Integer> traversalQueue = new ArrayQueue<>();
+    //Generate traversal priority min queue
+    PriorityQueueADT<Integer> traversalQueue = new ArrayPriorityMinQueue<>();
     
     //Generate visited boolean array
     boolean[] visited = new boolean[this.vertices.size()];
@@ -308,7 +314,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
       visited[i] = false;
     
     //Generate path lengths array
-    int[] pathLength = new int[this.vertices.size()];
+    double[] pathLength = new double[this.vertices.size()];
     for(int i = 0; i < pathLength.length; i++)
       pathLength[i] = -1;
     
@@ -318,8 +324,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
       antecessor[i] = -1;
     
     //Enqueue first item and set as visited and set path length
-    traversalQueue.enqueue(indexes[0]);
-    visited[indexes[0]] = true;
+    traversalQueue.enqueue(indexes[0], 0);
     pathLength[indexes[0]] = 0;
     
     //Start recursion
@@ -339,7 +344,7 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     return resultList.iterator();
   }
   
-  private void iterateSP(QueueADT<Integer> traversalQueue, boolean[] visited, int[] pathLength, int[] antecessor, int target) {
+  private void iterateSP(PriorityQueueADT<Integer> traversalQueue, boolean[] visited, double[] pathLength, int[] antecessor, int target) {
     //Dequeue item
     int index;
     
@@ -351,34 +356,36 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
       return;
     }
     
+    //Proceed in recursion if it was already visited
+    if(visited[index] == true){
+      this.iterateSP(traversalQueue, visited, pathLength, antecessor, target);
+      return;
+    }
+    
+    //Visit if removed from queue
+    visited[index] = true;
+    
     //Look for not visited neighbors to add to queue
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) && !visited[i]){
-        //Add neighbor to queue and set as visited
-        traversalQueue.enqueue(i);
-        visited[i] = true;
+      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+        //Get cost
+        double cost = this.adjMatrix.get(index).get(i);
+        double fullCost = cost + pathLength[index];
         
-        //Get already existent cost
-        int oldCost = pathLength[i];
-        
-        //Get new cost
-        int newCost = pathLength[index] + 1;
-        
+        //Add neighbor to queue
+        traversalQueue.enqueue(i, fullCost);
+                
         //Compare costs
         //There is no old cost or new cost is smaller then old cost
-        if(oldCost == -1 || newCost < oldCost){
+        if(pathLength[i] == -1 || fullCost < pathLength[i]){
           //Set newCost as used cost
-          pathLength[i] = newCost;
+          pathLength[i] = fullCost;
           
           //Updates antecessor reference
           antecessor[i] = index;
         }
-        
-        //Stops if target was adquired
-        if(i == target)
-          return;
       }
     }
     
@@ -388,8 +395,8 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
   }
 
   /**
-   * Returns true if this graph is connected, false otherwise.
-   * @return true if this graph is connected
+   * Returns true if this network is connected, false otherwise.
+   * @return true if this network is connected
    */
   @Override
   public boolean isConnected() {
@@ -408,11 +415,11 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
           continue;
         
         //It is pointing to another vertice
-        if(this.adjMatrix.get(i).get(j) == true)
+        if(this.adjMatrix.get(i).get(j) != Double.POSITIVE_INFINITY)
           connectTo = true;
         
         //It is being pointer by another vertice
-        if(this.adjMatrix.get(j).get(i) == true)
+        if(this.adjMatrix.get(j).get(i) != Double.POSITIVE_INFINITY)
           connectFrom = true;
       }
       
@@ -447,8 +454,8 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
         if(j == 0)
           stb.append(this.vertices.get(i)).append("\t");
         
-        if(this.adjMatrix.get(i).get(j) == true)
-          stb.append("1");
+        if(this.adjMatrix.get(i).get(j) != Double.POSITIVE_INFINITY)
+          stb.append(this.adjMatrix.get(i).get(j));
         else
           stb.append("");
         
@@ -459,5 +466,159 @@ public class Graph<T> extends BaseGraph<T> implements GraphADT<T> {
     }
   
     return stb.toString();
+  }
+
+   /**
+   * Returns the weight of the shortest path in this network.
+   * Similar to iteratorShortestPath(), but returns total path length instead.
+   * Preference is to less weighted edge.
+   * Uses recursion.
+   * Throws ElementNotFoundException if vertices were not found.
+   * Throws VertexIsNotAccessibleException if vertex2 is not accessible from vertex1.
+   * @param vertex1 the first vertex
+   * @param vertex2 the second vertex
+   * @return the weight of the shortest path in this network
+   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.VertexIsNotAccessibleException
+   */
+  @Override
+  public double shortestPathWeight(T vertex1, T vertex2) throws ElementNotFoundException, VertexIsNotAccessibleException {
+    //Get indexes
+    int[] indexes = this.getIndex(vertex1, vertex2);
+    
+    //Index is invalid
+    if(indexes[0] < 0 || indexes[1] < 0)
+      throw new ElementNotFoundException("Vertex was not found!");
+    
+    //Generate traversal priority min queue to use weighted edges
+    PriorityQueueADT<Integer> traversalQueue = new ArrayPriorityMinQueue<>();
+    
+    //Generate visited boolean array
+    boolean[] visited = new boolean[this.vertices.size()];
+    for(int i = 0; i < visited.length; i++)
+      visited[i] = false;
+    
+    //Generate path lengths array
+    double[] pathLength = new double[this.vertices.size()];
+    for(int i = 0; i < pathLength.length; i++)
+      pathLength[i] = -1;
+    
+    //Generate antecessor array
+    int[] antecessor = new int[this.vertices.size()];
+    for(int i = 0; i < antecessor.length; i++)
+      antecessor[i] = -1;
+    
+    //Enqueue first item and set as visited and set path length
+    traversalQueue.enqueue(indexes[0], 0);
+    pathLength[indexes[0]] = 0;
+    
+    //Start recursion
+    this.iterateSP(traversalQueue, visited, pathLength, antecessor, indexes[1]);
+    
+    //Successfully achieved target
+    if(antecessor[indexes[1]] != -1)
+      //Return path full weight
+      return pathLength[indexes[1]];
+
+    //Could not achieve second vertex
+    throw new VertexIsNotAccessibleException("Vertex " + vertex2.toString() + " is not accessible from " + vertex1.toString() + " on network.");
+  }
+  
+  /**
+   * Returns a minimum spanning tree of the network from desired element.
+   * Preference is to less weighted edge.
+   * Uses recursion.
+   * Similar to iterator BFS, but using greedy technic to select next vertex instead.
+   * @param vertex
+   * @return 
+   * @throws estg.ed.exceptions.ElementNotFoundException 
+   */
+  @Override
+  public NetworkADT<T> mstNetwork(T vertex) throws ElementNotFoundException {
+    //Get index
+    int index = this.getIndex(vertex);
+    
+    //Index is invalid
+    if(index < 0)
+      throw new ElementNotFoundException("Vertex was not found!");
+    
+   //Generate result graph
+    NetworkADT<T> resultGraph = new Network<>();
+        
+    //Generate a priority min queue to store the weighted edges
+    PriorityQueueADT<Integer> traverseQueue = new ArrayPriorityMinQueue<>();
+    
+    //Get size
+    int size = this.vertices.size();
+    
+    //Generate visited boolean array
+    boolean[] visited = new boolean[size];
+    for(int i = 0; i < visited.length; i++)
+      visited[i] = false;
+    
+    //Generate antecessor boolean array
+    int[] antecessor = new int[size];
+    for(int i = 0; i < antecessor.length; i++)
+      antecessor[i] = -1;
+    
+    //Enqueue first item
+    traverseQueue.enqueue(index, 0);
+    
+    //Iterate
+    this.iterateMST(resultGraph, traverseQueue, visited, antecessor);
+        
+    //Return result
+    return resultGraph;
+  }
+  
+  protected void iterateMST(NetworkADT<T> resultGraph, PriorityQueueADT<Integer> traversalQueue, boolean[] visited, int[] antecessor) {
+    //Dequeue item
+    int index;
+    
+    try {
+      index = traversalQueue.dequeue();
+      
+    } catch (EmptyCollectionException ex) {
+      //Stop if queue is empty
+      return;
+    }
+    
+    //Proceed in recursion if it was already visited
+    if(visited[index] == true){
+      this.iterateMST(resultGraph, traversalQueue, visited, antecessor);
+      return;
+    }
+    
+    //Set as visited when dequeued
+    visited[index] = true;
+    
+    //Add index element to result
+    resultGraph.addVertex(this.vertices.get(index));
+    
+    //If has antecessor, generate an edge
+    int antIndex = antecessor[index];
+    if(antIndex != -1){
+      try {
+        //Add an edge with original weights
+        resultGraph.addEdge(this.vertices.get(antIndex), this.vertices.get(index), this.adjMatrix.get(antIndex).get(index));
+      } catch (ElementNotFoundException ex){}
+    }
+    
+    //Look for not visited neighbors to add to queue
+    int size = this.vertices.size();
+    for(int i = 0; i < size; i++){
+      //Get current to neightbor edge relation and check if was visited
+      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+        //Add neighbor to queue
+        traversalQueue.enqueue(i, this.adjMatrix.get(index).get(i));
+        
+        //Set antecessor
+        antecessor[i] = index;
+      }
+    }
+    
+    //Proceed in recursion if there is vertices in queue to visit
+    if(!traversalQueue.isEmpty())
+      this.iterateMST(resultGraph, traversalQueue, visited, antecessor);
   }
 }

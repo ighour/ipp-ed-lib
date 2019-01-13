@@ -6,6 +6,7 @@
 package estg.ed.interfaces;
 
 import estg.ed.exceptions.ElementNotFoundException;
+import estg.ed.exceptions.VertexIsNotAccessibleException;
 
 /**
  * Contract for networks.
@@ -15,7 +16,8 @@ import estg.ed.exceptions.ElementNotFoundException;
  */
 public interface NetworkADT<T> extends BaseGraphADT<T> {
   /**
-   * Inserts an edge between two vertices of this graph.
+   * Inserts an edge between two vertices of this network.
+   * Using weights at edges.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
    * @param weight the weight
@@ -29,6 +31,15 @@ public interface NetworkADT<T> extends BaseGraphADT<T> {
    * @param vertex2 the second vertex
    * @return the weight of the shortest path in this network
    * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.VertexIsNotAccessibleException
    */
-  public double shortestPathWeight(T vertex1, T vertex2) throws ElementNotFoundException;
+  public double shortestPathWeight(T vertex1, T vertex2) throws ElementNotFoundException, VertexIsNotAccessibleException;
+  
+  /**
+   * Returns a minimum spanning tree of the network from desired element.
+   * @param vertex
+   * @return 
+   * @throws estg.ed.exceptions.ElementNotFoundException 
+   */
+  public NetworkADT<T> mstNetwork(T vertex) throws ElementNotFoundException;
 }
