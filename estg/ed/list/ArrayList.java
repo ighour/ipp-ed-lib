@@ -25,7 +25,7 @@ public abstract class ArrayList<T> implements ListADT<T> {
   /**
    * Circular dynamic array to store data.
    */
-  DynamicArrayContract<T> array;
+  protected DynamicArrayContract<T> array;
   
   /**
    * Count modifications in list.

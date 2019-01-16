@@ -9,7 +9,7 @@ import estg.ed.exceptions.NotComparableException;
 import estg.ed.interfaces.OrderedListADT;
 
 /**
- * Ordered list implemented with circular dynamic array
+ * Ordered list implemented with circular dynamic array.
  * @author igu
  * @param <T>
  */
