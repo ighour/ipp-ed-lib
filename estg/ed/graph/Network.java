@@ -36,11 +36,17 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
   protected DynamicArrayContract<DynamicArrayContract<Double>> adjMatrix;
   
   /**
+   * Default value to put when no edge exists between vertices.
+   */
+  protected double NO_EDGE_VALUE;
+  
+  /**
   * Instantiates an empty network.
   */
   public Network() {
     super();
     this.adjMatrix = new DynamicArrayCircular<>();
+    this.NO_EDGE_VALUE = Double.POSITIVE_INFINITY;
   }
   
   /**
@@ -55,14 +61,14 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     //Add vertice to vertices list at end
     this.vertices.add(vertex, this.vertices.size());
 
-    //Set new vertice adjacencys as POSITIVE_INFINITY
+    //Set new vertice adjacencys as NO_EDGE_VALUE
     int size = this.adjMatrix.size();
     for(int i = 0; i < size; i++){
-      //Set all on new vertex column to POSITIVE_INFINITY (is the last index of each row)
-      this.adjMatrix.get(i).add(Double.POSITIVE_INFINITY, size - 1);
+      //Set all on new vertex column to NO_EDGE_VALUE (is the last index of each row)
+      this.adjMatrix.get(i).add(this.NO_EDGE_VALUE, size - 1);
       
-      //Set all on new vertex row to POSITIVE_INFINITY (all the last row)
-      this.adjMatrix.get(size - 1).add(Double.POSITIVE_INFINITY, i);
+      //Set all on new vertex row to NO_EDGE_VALUE (all the last row)
+      this.adjMatrix.get(size - 1).add(this.NO_EDGE_VALUE, i);
     }
   }
 
@@ -121,7 +127,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
    */
   @Override
   public void removeEdge(T vertex1, T vertex2) throws ElementNotFoundException {
-    this.changeEdge(vertex1, vertex2, Double.POSITIVE_INFINITY);
+    this.changeEdge(vertex1, vertex2, this.NO_EDGE_VALUE);
   }
   
 /**
@@ -204,7 +210,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != this.NO_EDGE_VALUE && !visited[i]){
         //Add neighbor to queue and set as visited
         traversalQueue.enqueue(i);
         visited[i] = true;
@@ -273,7 +279,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != this.NO_EDGE_VALUE && !visited[i]){
         //Add neighbor to stack and set as visited
         traversalStack.push(i);
         visited[i] = true;
@@ -369,7 +375,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != this.NO_EDGE_VALUE && !visited[i]){
         //Get cost
         double cost = this.adjMatrix.get(index).get(i);
         double fullCost = cost + pathLength[index];
@@ -415,11 +421,11 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
           continue;
         
         //It is pointing to another vertice
-        if(this.adjMatrix.get(i).get(j) != Double.POSITIVE_INFINITY)
+        if(this.adjMatrix.get(i).get(j) != this.NO_EDGE_VALUE)
           connectTo = true;
         
         //It is being pointer by another vertice
-        if(this.adjMatrix.get(j).get(i) != Double.POSITIVE_INFINITY)
+        if(this.adjMatrix.get(j).get(i) != this.NO_EDGE_VALUE)
           connectFrom = true;
       }
       
@@ -454,7 +460,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
         if(j == 0)
           stb.append(this.vertices.get(i)).append("\t");
         
-        if(this.adjMatrix.get(i).get(j) != Double.POSITIVE_INFINITY)
+        if(this.adjMatrix.get(i).get(j) != this.NO_EDGE_VALUE)
           stb.append(this.adjMatrix.get(i).get(j));
         else
           stb.append("");
@@ -608,7 +614,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     int size = this.vertices.size();
     for(int i = 0; i < size; i++){
       //Get current to neightbor edge relation and check if was visited
-      if(this.adjMatrix.get(index).get(i) != Double.POSITIVE_INFINITY && !visited[i]){
+      if(this.adjMatrix.get(index).get(i) != this.NO_EDGE_VALUE && !visited[i]){
         //Add neighbor to queue
         traversalQueue.enqueue(i, this.adjMatrix.get(index).get(i));
         
