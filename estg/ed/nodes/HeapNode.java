@@ -8,7 +8,7 @@ package estg.ed.nodes;
 /**
  * Node with reference to left child, right child and parent
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class HeapNode<T> extends BinaryTreeNode<T> {
   
@@ -19,7 +19,7 @@ public class HeapNode<T> extends BinaryTreeNode<T> {
   
   /**
    * Create a node with data.
-   * @param data
+   * @param data content of node
    */
   public HeapNode(T data){
     super(data);

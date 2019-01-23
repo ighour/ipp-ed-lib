@@ -9,8 +9,9 @@ import estg.ed.interfaces.DynamicArrayContract;
 
 /**
  * Implements a dynamic array which expands when needed.
+ * Also, reorganize itself when an element is removed before last valid index.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
@@ -37,7 +38,7 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
 
   /**
    * Generates a dynamic array with desired size.
-   * @param size
+   * @param size integer for initial size of array
    */
   public DynamicArray(int size){
     this.collection = (T[]) new Object[size];
@@ -49,10 +50,9 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
    * Index need to be between 0 and next position.
    * Increases array size if needed.
    * Push elements in array if is not the next available index.
-   * Throws IndexOutOfBoundsException if index is invalid.
-   * @param element
-   * @param index
-   * @throws IndexOutOfBoundsException 
+   * @param element element to add
+   * @param index position in array to add
+   * @throws IndexOutOfBoundsException index is invalid
    */
   @Override
   public void add(T element, int index) throws IndexOutOfBoundsException {
@@ -79,10 +79,9 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
    * Remove an element from desired index.
    * Index need to be between 0 and next position.
    * Pull elements in array if is not the last index.
-   * Throws IndexOutOfBoundsException if index is invalid.
-   * @param index
-   * @return 
-   * @throws IndexOutOfBoundsException 
+   * @param index position in array to remove
+   * @return element on index position
+   * @throws IndexOutOfBoundsException  index is invalid
    */
   @Override
   public T remove(int index) throws IndexOutOfBoundsException {
@@ -110,10 +109,9 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
    * Change content of desired index.
    * Index need to be between 0 and last position.
-   * Throws IndexOutOfBoundsException if index is invalid.
-   * @param element
-   * @param index
-   * @throws IndexOutOfBoundsException 
+   * @param element new content
+   * @param index position to put new content
+   * @throws IndexOutOfBoundsException  index is invalid
    */
   @Override
   public void change(T element, int index) throws IndexOutOfBoundsException {
@@ -128,10 +126,9 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
    * Get an element from desired index.
    * Index need to be between 0 and next position.
-   * Throws IndexOutOfBoundsException if index is invalid.
-   * @param index
-   * @return 
-   * @throws IndexOutOfBoundsException 
+   * @param index array position
+   * @return element in array position
+   * @throws IndexOutOfBoundsException  index is invalid
    */
   @Override
   public T get(int index) throws IndexOutOfBoundsException {
@@ -145,7 +142,7 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
    * Get length of array.
    * Only counts valid indexes between 0 and next-1.
-   * @return 
+   * @return integer size of array
    */
   @Override
   public int size() {
@@ -155,7 +152,7 @@ public class DynamicArray<T> implements DynamicArrayContract<T> {
   /**
    * Check if array is empty.
    * Only counts valid indexes between 0 and next-1.
-   * @return 
+   * @return true if array is empty
    */
   @Override
   public boolean isEmpty() {

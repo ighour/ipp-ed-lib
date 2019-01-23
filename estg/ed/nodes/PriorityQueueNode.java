@@ -35,8 +35,8 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
   
   /**
    * Instantiates with data and priority
-   * @param data
-   * @param priority 
+   * @param data content of node
+   * @param priority double value of priority
    */
   public PriorityQueueNode(T data, double priority){
     this.data = data;
@@ -57,7 +57,7 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
   
   /**
    * Compare node.
-   * @return
+   * @return 1 if is bigger. -1 if is smaller. 0 if is equivalent.
    */  
   @Override
   public int compareTo(PriorityQueueNode o) {

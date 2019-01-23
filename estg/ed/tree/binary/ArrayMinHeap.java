@@ -12,7 +12,7 @@ import estg.ed.interfaces.HeapMinADT;
  * Minheap implementation with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
 
@@ -20,7 +20,7 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
    * Heapify up an element.
    * Until element is smaller then parent.
    * Uses recursion.
-   * @param elementIndex
+   * @param elementIndex index of element to heapifyUp
    */
   @Override
   protected void heapifyUp(int elementIndex) {
@@ -48,10 +48,9 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
 
   /**
    * Removes element with the lowest value from this heap.
-   * Throws EmptyCollectionException if heap is empty.
    * Uses removeRoot() method of ArrayHeap.
    * @return the element with the lowest value from this heap
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   @Override
   public T removeMin() throws EmptyCollectionException {
@@ -67,7 +66,7 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
    * Heapify down an element.
    * Until parent is smaller or equal to children.
    * Uses recursion.
-   * @param parentIndex
+   * @param parentIndex index of element to heapifyDown
    */
   @Override
   protected void heapifyDown(int parentIndex){
@@ -140,10 +139,9 @@ public class ArrayMinHeap<T> extends ArrayHeap<T> implements HeapMinADT<T> {
   
   /**
    * Returns a reference to the element with the lowest value in this heap.
-   * Throws EmptyCollectionException if heap is empty.
    * Uses findRoot() method of ArrayHeap.
    * @return a reference to the element with the lowest value in this heap
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   @Override
   public T findMin() throws EmptyCollectionException {

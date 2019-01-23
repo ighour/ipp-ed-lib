@@ -6,7 +6,6 @@
 package estg.ed.graph;
 
 import estg.ed.exceptions.ElementNotFoundException;
-import estg.ed.exceptions.EmptyCollectionException;
 import estg.ed.interfaces.NetworkADT;
 import estg.ed.interfaces.PriorityQueueADT;
 import estg.ed.tree.binary.ArrayPriorityMinQueue;
@@ -14,7 +13,7 @@ import estg.ed.tree.binary.ArrayPriorityMinQueue;
 /**
  * Implements a bidirectional network with an adjacency matrix.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class BidirectionalNetwork<T> extends Network<T> implements NetworkADT<T> {
   /**
@@ -26,7 +25,7 @@ public class BidirectionalNetwork<T> extends Network<T> implements NetworkADT<T>
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
    * @param weight the weight
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
    */
   @Override
   public void addEdge(T vertex1, T vertex2, double weight) throws ElementNotFoundException {    
@@ -40,7 +39,7 @@ public class BidirectionalNetwork<T> extends Network<T> implements NetworkADT<T>
    * Uses changeEdge() method to handle edge update.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
    */
   @Override
   public void removeEdge(T vertex1, T vertex2) throws ElementNotFoundException {
@@ -52,10 +51,10 @@ public class BidirectionalNetwork<T> extends Network<T> implements NetworkADT<T>
  * Helper method to change an edge to desired double value.
  * Used by addEdge() and removeEdge() methods.
  * Throws ElementNotFoundException if vertex is not found at network.
- * @param vertex1
- * @param vertex2
- * @param newValue
- * @throws ElementNotFoundException 
+ * @param vertex1 vertex at start of edge
+ * @param vertex2 vertex at end of edge
+ * @param newValue new weight of edge
+ * @throws ElementNotFoundException one of vertices were not found
  */
   @Override
   protected void changeEdge(T vertex1, T vertex2, double newValue) throws ElementNotFoundException {
@@ -76,9 +75,9 @@ public class BidirectionalNetwork<T> extends Network<T> implements NetworkADT<T>
    * Preference is to less weighted edge.
    * Uses recursion.
    * Similar to iterator BFS, but using greedy technic to select next vertex instead.
-   * @param vertex
-   * @return 
-   * @throws estg.ed.exceptions.ElementNotFoundException 
+   * @param vertex vertex to start the spawning tree
+   * @return a BidirectionalNetwork with the minimum spawning tree
+   * @throws estg.ed.exceptions.ElementNotFoundException vertex was not found
    */
   @Override
   public NetworkADT<T> mstNetwork(T vertex) throws ElementNotFoundException {

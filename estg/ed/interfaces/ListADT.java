@@ -12,20 +12,20 @@ import java.util.Iterator;
 /**
  * Contract for lists
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface ListADT<T> {
   /**
    * Removes and returns the first element from this list.
    * @return the first element from this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   public T removeFirst() throws EmptyCollectionException;
 
   /**
    * Removes and returns the last element from this list.
    * @return the last element from this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   public T removeLast() throws EmptyCollectionException;
 
@@ -33,22 +33,22 @@ public interface ListADT<T> {
    * Removes and returns the specified element from this list.
    * @param element the element to be removed from the list
    * @return the last element of list
-   * @throws estg.ed.exceptions.EmptyCollectionException
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
+   * @throws estg.ed.exceptions.ElementNotFoundException element was not found
    */
   public T remove(T element) throws EmptyCollectionException, ElementNotFoundException;
 
   /**
    * Returns a reference to the first element in this list.
    * @return a reference to the first element in this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   public T first() throws EmptyCollectionException;
 
   /**
    * Returns a reference to the last element in this list.
    * @return a reference to the last element in this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   public T last() throws EmptyCollectionException;
 

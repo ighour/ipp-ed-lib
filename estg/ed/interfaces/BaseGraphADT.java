@@ -11,7 +11,7 @@ import java.util.Iterator;
 /**
  * Contract for base of graphs and networks.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface BaseGraphADT<T> {
   /**
@@ -23,7 +23,7 @@ public interface BaseGraphADT<T> {
   /**
    * Removes a single vertex with the given value from this graph.
    * @param vertex the vertex to be removed from this graph
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException vertex was not found
    */
   public void removeVertex(T vertex) throws ElementNotFoundException;
   
@@ -31,7 +31,7 @@ public interface BaseGraphADT<T> {
    * Removes an edge between two vertices of this graph.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
    */
   public void removeEdge(T vertex1, T vertex2) throws ElementNotFoundException;
 

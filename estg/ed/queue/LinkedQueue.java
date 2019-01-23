@@ -12,7 +12,7 @@ import estg.ed.nodes.LinearNode;
 /**
  * Queue implemented with linked list.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class LinkedQueue<T> implements QueueADT<T> {
   
@@ -67,9 +67,8 @@ public class LinkedQueue<T> implements QueueADT<T> {
   /** 
    * Removes and returns the element at the front of this queue.
    * Removes from first node after front sentinel.
-   * Throws EmptyCollectionException if is empty.
    * @return the element at the front of this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T dequeue() throws EmptyCollectionException {
@@ -91,9 +90,8 @@ public class LinkedQueue<T> implements QueueADT<T> {
   /** 
    * Returns without removing the element at the front of this queue.
    * Returns from first node after front sentinel.
-   * Throws EmptyCollectionException if first position is not found (list is empty).
    * @return the first element in this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T first() throws EmptyCollectionException {

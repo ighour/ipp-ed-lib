@@ -12,7 +12,7 @@ import estg.ed.nodes.DoubleLinearNode;
 /**
  * Ordered list implemented with double linked elements.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class UnorderedLinkedList<T> extends LinkedList<T> implements UnorderedListADT<T> {
 
@@ -54,10 +54,9 @@ public class UnorderedLinkedList<T> extends LinkedList<T> implements UnorderedLi
 
   /**
    * Adds the specified element after another element.
-   * Throws ElementNotFoundException if target does not exist.
    * @param element the element to be added to this list
    * @param target the target element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException target does not exist
    */
   @Override
   public void addAfter(T element, T target) throws ElementNotFoundException {   

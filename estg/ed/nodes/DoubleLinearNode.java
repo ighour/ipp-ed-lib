@@ -8,7 +8,7 @@ package estg.ed.nodes;
 /**
  * Node with reference to next and previous nodes.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class DoubleLinearNode<T> {
   /**
@@ -33,7 +33,7 @@ public class DoubleLinearNode<T> {
 
   /**
    * Create a node with data.
-   * @param data 
+   * @param data content of node
    */
   public DoubleLinearNode(T data){
     this.data = data;

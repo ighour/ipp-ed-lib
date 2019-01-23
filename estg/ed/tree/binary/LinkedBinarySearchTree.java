@@ -14,7 +14,7 @@ import estg.ed.nodes.BinaryTreeNode;
 /**
  * Binary search tree implementation with linked nodes.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements BinarySearchTreeADT<T> {
 
@@ -27,7 +27,7 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
   
   /**
    * Instantiates a binary search tree with root.
-   * @param root
+   * @param root first element on tree
    */
   public LinkedBinarySearchTree(T root){
     super(root);
@@ -37,7 +37,7 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
   * Adds the specified object to the binary search tree in the appropriate position according to its key value.
   * Note that equal elements are added to the right.
   * @param element the element to be added to the binary search tree
-  * @throws estg.ed.exceptions.NotComparableException
+  * @throws estg.ed.exceptions.NotComparableException element is not comparable
   */
   @Override
   public void addElement(T element) throws NotComparableException {
@@ -97,14 +97,11 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
   /**
    * Removes the first element that matches the specified target element from the binary search tree and returns a reference to it.
    * Replaces removed node.
-   * Throws ElementNotFoundException if the specified target element is not found in the binary search tree.
-   * Throws EmptyCollectionException if tree is empty.
-   * Throws NotComparableException if target element is not comparable.
    * @param targetElement the element to be removed from this tree
    * @return the element removed from this tree
-   * @throws estg.ed.exceptions.ElementNotFoundException
-   * @throws estg.ed.exceptions.EmptyCollectionException
-   * @throws estg.ed.exceptions.NotComparableException
+   * @throws estg.ed.exceptions.ElementNotFoundException specified target element is not found
+   * @throws estg.ed.exceptions.EmptyCollectionException tree is empty
+   * @throws estg.ed.exceptions.NotComparableException target element is not comparable
    */
   @Override
   public T removeElement(T targetElement) throws ElementNotFoundException, EmptyCollectionException, NotComparableException {
@@ -165,7 +162,7 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
    * Returns a reference to a node that will replace the one specified for removal.
    * In the case where the removed node has two children, the inorder successor is used as its replacement.
    *
-   * @param baseNode
+   * @param baseNode node to be replaced
    * @return a reference to the replacing node
    */
   protected BinaryTreeNode<T> replacement (BinaryTreeNode<T> baseNode){
@@ -224,9 +221,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
   /**
    * Removes all occurences of the specified element from this tree.
    * Uses removeElement() while tree has desired element.
-   * Throws NotComparableException if target element is not comparable.
    * @param targetElement the element that the list will have all instances of it removed
-   * @throws estg.ed.exceptions.NotComparableException
+   * @throws estg.ed.exceptions.NotComparableException target element is not comparable
    */
   @Override
   public void removeAllOccurrences(T targetElement) throws NotComparableException {
@@ -244,9 +240,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
   /**
    * Removes and returns the smallest element from this tree.
-   * Throws EmptyCollectionException if tree is empty.
    * @return the smallest element from this tree.
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException tree is empty
    */
   @Override
   public T removeMin() throws EmptyCollectionException {
@@ -291,9 +286,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
   /**
    * Removes and returns the largest element from this tree.
-   * Throws EmptyCollectionException if tree is empty.
    * @return the largest element from this tree
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException tree is empty
    */
   @Override
   public T removeMax() throws EmptyCollectionException {
@@ -320,10 +314,6 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
       
       //After found biggest right child (currentNode)
 
-      //Maior filho direito (currentNode) é:
-      //folha: filho direito do pai vai a null
-      //interno: filho direito do pai vai ao nó esquerdo (getRight() do currentNode)
-      
       //Is a leaf (has no children)
       if(currentNode.left == null)
         //parentNode right child became null
@@ -341,9 +331,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
   /**
    * Returns a reference to the smallest element in this tree.
-   * Throws EmptyCollectionException if tree is empty.
    * @return a reference to the smallest element in this tree
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException tree is empty
    */
   @Override
   public T findMin() throws EmptyCollectionException {
@@ -368,9 +357,8 @@ public class LinkedBinarySearchTree<T> extends LinkedBinaryTree<T> implements Bi
 
   /**
    * Returns a reference to the largest element in this tree.
-   * Throws EmptyCollectionException if tree is empty.
    * @return a reference to the largest element in this tree
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException tree is empty
    */
   @Override
   public T findMax() throws EmptyCollectionException {

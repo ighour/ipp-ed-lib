@@ -12,13 +12,13 @@ import java.util.Iterator;
 /**
  * Contract for binary trees.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface BinaryTreeADT<T> {
   /**
    * Returns a reference to the root element.
    * @return a reference to the root
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException if tree is empty
    */
   public T getRoot() throws EmptyCollectionException;
   
@@ -46,7 +46,7 @@ public interface BinaryTreeADT<T> {
    * Throws an exception if the specified element is not found.
    * @param targetElement the element being sought in the tree
    * @return a reference to the specified element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException if targetElement is not found
    */
   public T find (T targetElement) throws ElementNotFoundException;
   

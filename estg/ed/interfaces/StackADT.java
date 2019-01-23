@@ -10,7 +10,7 @@ import estg.ed.exceptions.EmptyCollectionException;
 /**
  * Contract for Stacks
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface StackADT<T> {
   /** 
@@ -22,14 +22,14 @@ public interface StackADT<T> {
   /** 
    * Removes and returns the top element from this stack.
    * @return T element removed from the top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
    public T pop() throws EmptyCollectionException;
    
   /** 
    * Returns without removing the top element of this stack.
    * @return T element on top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
    public T peek() throws EmptyCollectionException;
    

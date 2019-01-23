@@ -14,7 +14,7 @@ import estg.ed.interfaces.StackADT;
  * Stack implemented with array.
  * Using already implemented dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class ArrayStack<T> implements StackADT<T> {
   
@@ -45,9 +45,8 @@ public class ArrayStack<T> implements StackADT<T> {
   /** 
    * Removes and returns the top element from this stack.
    * Removes from internal dynamic array from last index.
-   * Throws EmptyCollectionException if internal array is empty.
    * @return T element removed from the top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
   @Override
   public T pop() throws EmptyCollectionException {
@@ -62,9 +61,8 @@ public class ArrayStack<T> implements StackADT<T> {
   /** 
    * Returns without removing the top element of this stack.
    * Returns from internal dynamic array from last index.
-   * Throws EmptyCollectionException if internal array is empty.
    * @return T element on top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
   @Override
   public T peek() throws EmptyCollectionException {

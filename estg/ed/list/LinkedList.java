@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 /**
  * List implemented with double linked elements.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public abstract class LinkedList<T> implements ListADT<T> {
 
@@ -57,9 +57,8 @@ public abstract class LinkedList<T> implements ListADT<T> {
   /**
    * Removes and returns the first element from this list.
    * Removes first node after front sentinel.
-   * Throws EmptyCollectionException if list is empty.
    * @return the first element from this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   @Override
   public T removeFirst() throws EmptyCollectionException {
@@ -82,9 +81,8 @@ public abstract class LinkedList<T> implements ListADT<T> {
   /**
    * Removes and returns the last element from this list.
    * Removes first node before rear sentinel.
-   * Throws EmptyCollectionException if list is empty.
    * @return the last element from this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   @Override
   public T removeLast() throws EmptyCollectionException {
@@ -107,12 +105,10 @@ public abstract class LinkedList<T> implements ListADT<T> {
   /**
    * Removes and returns the specified element from this list.
    * Removes desired node.
-   * Throws EmptyCollectionException if list is empty.
-   * Throws ElementNotFoundException if element was not found.
    * @param element the element to be removed from the list
    * @return the last element of list
-   * @throws estg.ed.exceptions.EmptyCollectionException
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
+   * @throws estg.ed.exceptions.ElementNotFoundException element was not found
    */
   @Override
   public T remove(T element) throws EmptyCollectionException, ElementNotFoundException {
@@ -145,9 +141,8 @@ public abstract class LinkedList<T> implements ListADT<T> {
   /**
    * Returns a reference to the first element in this list.
    * Returns first node data after front sentinel.
-   * Throws EmptyCollectionException if list is empty.
    * @return a reference to the first element in this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   @Override
   public T first() throws EmptyCollectionException {
@@ -160,9 +155,8 @@ public abstract class LinkedList<T> implements ListADT<T> {
   /**
    * Returns a reference to the last element in this list.
    * Returns first node data before rear sentinel.
-   * Throws EmptyCollectionException if list is empty.
    * @return a reference to the last element in this list
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException list is empty
    */
   @Override
   public T last() throws EmptyCollectionException {
@@ -288,9 +282,8 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     /**
      * Check if there is next.
-     * Throws ConcurrentModificationException if list has changed.
-     * @throws ConcurrentModificationException
-     * @return 
+     * @throws ConcurrentModificationException list has changed
+     * @return true if there is next element in iterator
      */
     @Override
     public boolean hasNext() throws ConcurrentModificationException {
@@ -308,11 +301,9 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     /**
      * Get next element.
-     * Throws ConcurrentModificationException if list has changed.
-     * Throws NoSuchElementException if there is no more elements.
-     * @throws ConcurrentModificationException
-     * @throws NoSuchElementException
-     * @return 
+     * @throws ConcurrentModificationException list has changed
+     * @throws NoSuchElementException there is no next element
+     * @return next element in iterator
      */
     @Override
     public T next() throws ConcurrentModificationException, NoSuchElementException {
@@ -339,9 +330,7 @@ public abstract class LinkedList<T> implements ListADT<T> {
 
     /**
      * Remove element set as next.
-     * Throws IllegalStateException if next is not set.
-     * @throws IllegalStateException
-     * @return 
+     * @throws IllegalStateException Next element was not set
      */
     @Override
     public void remove() throws IllegalStateException{

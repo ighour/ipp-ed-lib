@@ -18,7 +18,7 @@ import java.util.Iterator;
 /**
  * Binary tree implementation with linked nodes.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
   
@@ -42,7 +42,7 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
   
   /**
    * Instantiates a binary tree with root.
-   * @param root
+   * @param root first element on tree
    */
   public LinkedBinaryTree(T root){
     this.count = 1;
@@ -51,9 +51,8 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
   /**
    * Returns a reference to the root element.
-   * Throws EmptyCollectionException if root is null.
    * @return a reference to the root
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException root is null
    */
   @Override
   public T getRoot() throws EmptyCollectionException {
@@ -94,10 +93,9 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
   /**
    * Returns a reference to the specified element if it is found in this binary tree.
-   * Throws ElementNotFoundException if the specified element is not found.
    * @param targetElement the element being sought in the tree
    * @return a reference to the specified element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException specified element is not found
    */
   @Override
   public T find(T targetElement) throws ElementNotFoundException {
@@ -113,9 +111,9 @@ public abstract class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
   /**
    * Search for targetElem in (sub)tree.
    * Uses recursion.
-   * @param targetElem
-   * @param currentNode
-   * @return 
+   * @param targetElem element to find
+   * @param currentNode node to start searching
+   * @return  node of found element or null if not found
    */
   private BinaryTreeNode<T> findNode(T targetElem, BinaryTreeNode<T> currentNode){
     //Node is null

@@ -24,7 +24,7 @@ import java.util.Iterator;
 /**
  * Implements a directional network with an adjacency matrix.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
 
@@ -74,9 +74,8 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
 
   /**
    * Removes a single vertex with the given value from this network.
-   * Throws ElementNotFoundException if vertex is not found at network.
    * @param vertex the vertex to be removed from this network
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException vertex was not found
    */
   @Override
   public void removeVertex(T vertex) throws ElementNotFoundException {
@@ -104,12 +103,11 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
    * Inserts an edge between two vertices of this network.
    * Using weights at edges.
    * Edge is directional, so addEdge(A,B) is different from addEdge(B,A).
-   * Throws ElementNotFoundException if vertex is not found at network.
    * Uses changeEdge() method to handle edge update.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
    * @param weight the weight
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
    */
   @Override
   public void addEdge(T vertex1, T vertex2, double weight) throws ElementNotFoundException {    
@@ -119,11 +117,10 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
   /**
    * Removes an edge between two vertices of this network.
    * Edge is directional, so removeEdge(A,B) is different from removeEdge(B,A).
-   * Throws ElementNotFoundException if vertex is not found at network.
    * Uses changeEdge() method to handle edge update.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
    */
   @Override
   public void removeEdge(T vertex1, T vertex2) throws ElementNotFoundException {
@@ -134,11 +131,10 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
  * Change edge value.
  * Helper method to change an edge to desired double value.
  * Used by addEdge() and removeEdge() methods.
- * Throws ElementNotFoundException if vertex is not found at network.
- * @param vertex1
- * @param vertex2
- * @param newValue
- * @throws ElementNotFoundException 
+ * @param vertex1 vertex at start of edge
+ * @param vertex2 vertex at end of edge
+ * @param newValue new weight to edge
+ * @throws ElementNotFoundException vertex was not found
  */
   protected void changeEdge(T vertex1, T vertex2, double newValue) throws ElementNotFoundException {
     //Get vertices indexes
@@ -479,13 +475,11 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
    * Similar to iteratorShortestPath(), but returns total path length instead.
    * Preference is to less weighted edge.
    * Uses recursion.
-   * Throws ElementNotFoundException if vertices were not found.
-   * Throws VertexIsNotAccessibleException if vertex2 is not accessible from vertex1.
    * @param vertex1 the first vertex
    * @param vertex2 the second vertex
    * @return the weight of the shortest path in this network
-   * @throws estg.ed.exceptions.ElementNotFoundException
-   * @throws estg.ed.exceptions.VertexIsNotAccessibleException
+   * @throws estg.ed.exceptions.ElementNotFoundException one of vertices were not found
+   * @throws estg.ed.exceptions.VertexIsNotAccessibleException second vertex is not accessible from first vertex
    */
   @Override
   public double shortestPathWeight(T vertex1, T vertex2) throws ElementNotFoundException, VertexIsNotAccessibleException {
@@ -535,9 +529,9 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
    * Preference is to less weighted edge.
    * Uses recursion.
    * Similar to iterator BFS, but using greedy technic to select next vertex instead.
-   * @param vertex
-   * @return 
-   * @throws estg.ed.exceptions.ElementNotFoundException 
+   * @param vertex vertex to start the spawning tree
+   * @return  a Network containing the minimium spawning tree
+   * @throws estg.ed.exceptions.ElementNotFoundException vertex was not found
    */
   @Override
   public NetworkADT<T> mstNetwork(T vertex) throws ElementNotFoundException {

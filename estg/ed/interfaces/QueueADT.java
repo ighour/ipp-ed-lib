@@ -8,7 +8,7 @@ package estg.ed.interfaces;
 /**
  * Contract for Queues.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface QueueADT<T> extends BaseQueueADT<T> {
   /** 

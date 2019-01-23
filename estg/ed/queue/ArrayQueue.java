@@ -13,7 +13,7 @@ import estg.ed.interfaces.QueueADT;
  * Queue implemented with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class ArrayQueue<T> implements QueueADT<T> {
   
@@ -44,9 +44,8 @@ public class ArrayQueue<T> implements QueueADT<T> {
   /** 
    * Removes and returns the element at the front of this queue.
    * Removes from internal circular dynamic array from first index.
-   * Throws EmptyCollectionException if array is empty.
    * @return the element at the front of this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T dequeue() throws EmptyCollectionException {
@@ -59,9 +58,8 @@ public class ArrayQueue<T> implements QueueADT<T> {
   /** 
    * Returns without removing the element at the front of this queue.
    * Returns from internal circular dynamic array from first index.
-   * Throws EmptyCollectionException if array is empty.
    * @return the first element in this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T first() throws EmptyCollectionException {

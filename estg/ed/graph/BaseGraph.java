@@ -12,7 +12,7 @@ import estg.ed.interfaces.DynamicArrayContract;
 /**
  * Implements a base for graphs and networks with an adjacency matrix.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public abstract class BaseGraph<T> implements BaseGraphADT<T> {
 
@@ -49,8 +49,8 @@ public abstract class BaseGraph<T> implements BaseGraphADT<T> {
   
   /**
    * Get index of a vertex.
-   * @param vertex1
-   * @return 
+   * @param vertex1 vertex to find
+   * @return index of vertex
    */  
   protected int getIndex(T vertex1){
     int size = this.vertices.size();
@@ -66,9 +66,9 @@ public abstract class BaseGraph<T> implements BaseGraphADT<T> {
   
   /**
    * Get indexes of a pair of vertex.
-   * @param vertex1
-   * @param vertex2
-   * @return 
+   * @param vertex1 vertex to find
+   * @param vertex2 second vertex to find
+   * @return integer array with indexes of vertices
    */  
   protected int[] getIndex(T vertex1, T vertex2){
     int[] result = new int[2];

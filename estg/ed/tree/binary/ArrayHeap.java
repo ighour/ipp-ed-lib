@@ -13,16 +13,15 @@ import estg.ed.interfaces.HeapADT;
  * Heap implementation with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT<T>  {
 
   /**
    * Adds the specified object to this heap.
    * Result depends on implementation of abstract method heapifyUp().
-   * Throws NotComparableException if element is not comparable.
    * @param element the element to added to this head
-   * @throws estg.ed.exceptions.NotComparableException
+   * @throws estg.ed.exceptions.NotComparableException element is not comparable
    */
   @Override
   public void addElement(T element) throws NotComparableException {
@@ -41,14 +40,14 @@ public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT
   
   /**
    * Heapify up an element.
-   * @param elementIndex
+   * @param elementIndex index of element to heapifyUp
    */
   protected abstract void heapifyUp(int elementIndex);
   
   /**
    * Removes root element of heap.
    * @return root element
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   protected T removeRoot() throws EmptyCollectionException {
     if(this.array.isEmpty())
@@ -74,14 +73,14 @@ public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT
   
   /**
    * Heapify down an element.
-   * @param parentIndex
+   * @param parentIndex index of element to heapifyDown
    */
   protected abstract void heapifyDown(int parentIndex);
   
   /**
    * Returns a reference to the element at root.
    * @return a reference to the element at root.
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   protected T findRoot() throws EmptyCollectionException {
     if(this.array.isEmpty())
@@ -92,8 +91,8 @@ public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT
   
   /**
    * Get parent index
-   * @param index
-   * @return 
+   * @param index index of child element
+   * @return index of parent element
    */
   protected int getParent(int index){
     return (index - 1) / 2;
@@ -101,8 +100,8 @@ public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT
   
   /**
    * Get left child index
-   * @param index
-   * @return 
+   * @param index index of parent element
+   * @return index of left child
    */
   protected int getLeftChild(int index){
     return index * 2 + 1;
@@ -110,8 +109,8 @@ public abstract class ArrayHeap<T> extends ArrayBinaryTree<T> implements HeapADT
   
   /**
    * Get right child index
-   * @param index
-   * @return 
+   * @param index index of parent element
+   * @return index of right child
    */
   protected int getRightChild(int index){
     return index * 2 + 2;

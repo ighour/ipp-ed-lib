@@ -8,7 +8,7 @@ package estg.ed.nodes;
 /**
  * Node with reference to next node.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class LinearNode<T> {
   /**
@@ -28,7 +28,7 @@ public class LinearNode<T> {
 
   /**
    * Create a node with data.
-   * @param data 
+   * @param data content of node
    */
   public LinearNode(T data){
       this.data = data;

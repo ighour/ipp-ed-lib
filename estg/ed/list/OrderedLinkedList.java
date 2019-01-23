@@ -12,7 +12,7 @@ import estg.ed.nodes.DoubleLinearNode;
 /**
  * Ordered list implemented with double linked elements.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class OrderedLinkedList<T> extends LinkedList<T> implements OrderedListADT<T> {
 
@@ -20,7 +20,7 @@ public class OrderedLinkedList<T> extends LinkedList<T> implements OrderedListAD
    * Adds the specified element to this list at the proper location.
    * Element needs to implement Comparable interface.
    * @param element the element to be added to this list
-   * @throws estg.ed.exceptions.NotComparableException
+   * @throws estg.ed.exceptions.NotComparableException element is not comparable
    */
   @Override
   public void add(T element) throws NotComparableException {

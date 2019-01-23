@@ -8,7 +8,7 @@ package estg.ed.nodes;
 /**
  * Node with reference to left and right children.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class BinaryTreeNode<T> {
   /**
@@ -28,7 +28,7 @@ public class BinaryTreeNode<T> {
   
   /**
    * Create a node with data.
-   * @param data
+   * @param data content of node
    */
   public BinaryTreeNode(T data){
     this.data = data;
@@ -37,7 +37,7 @@ public class BinaryTreeNode<T> {
   /**
    * Returns the number of children nodes in current tree.
    * Using recursion.
-   * @return 
+   * @return integer count of all children
    */
   public int numChildren(){
     int children = 0;

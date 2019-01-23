@@ -9,8 +9,9 @@ import estg.ed.interfaces.DynamicArrayContract;
 
 /**
  * Implements a circular dynamic array which expands when needed.
+ * Also, reorganize itself when an element is removed from the middle.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
 
@@ -43,7 +44,7 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
     
   /**
    * Generates a dynamic array with desired size.
-   * @param size
+   * @param size integer for initial size of array
    */
   public DynamicArrayCircular(int size){
       this.collection = (T[]) new Object[size];
@@ -56,10 +57,9 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
    * Index need to be between 0 and array size.
    * Increases array size if needed.
    * Push elements in array if is not the rear index.
-   * Throws IndexOutOfBoundsException if virtualIndex is invalid.
-   * @param element
+   * @param element element to add
    * @param virtualIndex external index
-   * @throws IndexOutOfBoundsException 
+   * @throws IndexOutOfBoundsException virtualIndex is out of bounds of array
    */
   @Override
   public void add(T element, int virtualIndex) throws IndexOutOfBoundsException {
@@ -93,10 +93,9 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
    * Remove an element from desired index.
    * Index need to be between 0 and array size.
    * Pull elements in array if is not the last index.
-   * Throws IndexOutOfBoundsException if index is invalid.
    * @param virtualIndex external index
-   * @return 
-   * @throws IndexOutOfBoundsException 
+   * @return element on external index position
+   * @throws IndexOutOfBoundsException virtualIndex is invalid
    */
   @Override
   public T remove(int virtualIndex) throws IndexOutOfBoundsException {
@@ -133,16 +132,18 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
   /**
    * Change content of desired index.
    * Index need to be between 0 and last position.
-   * Throws IndexOutOfBoundsException if index is invalid.
-   * @param element
-   * @param index
-   * @throws IndexOutOfBoundsException 
+   * @param element new content
+   * @param virtualIndex array position to put new content
+   * @throws IndexOutOfBoundsException virtualIndex is invalid
    */
   @Override
-  public void change(T element, int index) throws IndexOutOfBoundsException {
-    //Check if index is allowed
-    if(index < 0 || index >= this.rear)
-      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");
+  public void change(T element, int virtualIndex) throws IndexOutOfBoundsException {
+    //Check if virtualIndex is valid (0 to last position at end)
+    if(virtualIndex < 0 || virtualIndex > this.size() - 1)
+      throw new IndexOutOfBoundsException("Index " + virtualIndex + " is out of bounds!");
+    
+    //Get internal index
+    int index = this.convertIndex(virtualIndex);
 
     //Change content
     this.collection[index] = element;
@@ -151,10 +152,9 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
   /**
    * Get an element from desired index.
    * Index need to be between 0 and last position.
-   * Throws IndexOutOfBoundsException if index is invalid.
    * @param virtualIndex external index
-   * @return 
-   * @throws IndexOutOfBoundsException 
+   * @return element in array position
+   * @throws IndexOutOfBoundsException virtualIndex is invalid
    */
   @Override
   public T get(int virtualIndex) throws IndexOutOfBoundsException {
@@ -172,7 +172,7 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
   /**
    * Get length of array.
    * Only counts valid indexes between front and rear-1.
-   * @return 
+   * @return integer size of array
    */
   @Override
   public int size() {
@@ -182,7 +182,7 @@ public class DynamicArrayCircular<T> implements DynamicArrayContract<T> {
   /**
    * Check if array is empty.
    * Only counts valid indexes between front and rear-1.
-   * @return 
+   * @return true if array is empty
    */
   @Override
   public boolean isEmpty() {

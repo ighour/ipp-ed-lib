@@ -11,7 +11,7 @@ import estg.ed.interfaces.UnorderedListADT;
 /**
  * Unordered list implemented with circular dynamic array
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class UnorderedArrayList<T> extends ArrayList<T> implements UnorderedListADT<T> {
 
@@ -40,10 +40,9 @@ public class UnorderedArrayList<T> extends ArrayList<T> implements UnorderedList
   /**
    * Adds the specified element after another element.
    * Add to internal circular dynamic after a target.
-   * Throws ElementNotFoundException if target does not exist.
    * @param element the element to be added to this list
    * @param target the target element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException target does not exist
    */
   @Override
   public void addAfter(T element, T target) throws ElementNotFoundException {

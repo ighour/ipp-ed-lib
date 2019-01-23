@@ -14,7 +14,7 @@ import estg.ed.nodes.PriorityQueueNode;
  * Implements priority queue with maximum priority.
  * Uses double for priority.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class ArrayPriorityMaxQueue<T> extends ArrayMaxHeap<PriorityQueueNode<T>> implements PriorityQueueADT<T> {  
 
@@ -22,7 +22,7 @@ public class ArrayPriorityMaxQueue<T> extends ArrayMaxHeap<PriorityQueueNode<T>>
    * Adds one element to this priority queue.
    * Uses double type for priority.
    * @param element the element to be added to this queue
-   * @param priority
+   * @param priority double value of priority
    */
   @Override
   public void enqueue(T element, double priority) {
@@ -38,9 +38,8 @@ public class ArrayPriorityMaxQueue<T> extends ArrayMaxHeap<PriorityQueueNode<T>>
 
   /** 
    * Removes and returns the element at the front of this queue.
-   * Throws EmptyCollectionException if queue is empty.
    * @return the element at the front of this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T dequeue() throws EmptyCollectionException {
@@ -53,9 +52,8 @@ public class ArrayPriorityMaxQueue<T> extends ArrayMaxHeap<PriorityQueueNode<T>>
 
   /** 
    * Returns without removing the element at the front of this queue.
-   * Throws EmptyCollectionException if queue is empty.
    * @return the first element in this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
   @Override
   public T first() throws EmptyCollectionException {

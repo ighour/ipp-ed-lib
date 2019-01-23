@@ -11,20 +11,20 @@ import estg.ed.exceptions.EmptyCollectionException;
  * Contract for queue base.
  * Has all operations, except enqueue(), which depends if is a common queue or priority queue.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface BaseQueueADT<T> {
   /** 
    * Removes and returns the element at the front of this queue.
    * @return the element at the front of this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
    public T dequeue() throws EmptyCollectionException;
    
   /** 
    * Returns without removing the element at the front of this queue.
    * @return the first element in this queue
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException queue is empty
    */
    public T first() throws EmptyCollectionException;
    

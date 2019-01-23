@@ -11,7 +11,7 @@ import estg.ed.interfaces.OrderedListADT;
 /**
  * Ordered list implemented with circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class OrderedArrayList<T> extends ArrayList<T> implements OrderedListADT<T> {
 
@@ -20,7 +20,7 @@ public class OrderedArrayList<T> extends ArrayList<T> implements OrderedListADT<
    * Element needs to implement Comparable interface.
    * Add to internal circular dynamic array on proper location.
    * @param element the element to be added to this list
-   * @throws estg.ed.exceptions.NotComparableException
+   * @throws estg.ed.exceptions.NotComparableException element is not comparable
    */
   @Override
   public void add(T element) throws NotComparableException {

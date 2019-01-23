@@ -12,7 +12,7 @@ import estg.ed.interfaces.HeapMaxADT;
  * Maxheap implementation with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
 
@@ -20,7 +20,7 @@ public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
    * Heapify up an element.
    * Until element is higher then parent.
    * Uses recursion.
-   * @param elementIndex
+   * @param elementIndex index of element to heapifyUp
    */
   @Override
   protected void heapifyUp(int elementIndex) {
@@ -48,10 +48,9 @@ public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
 
   /**
    * Removes element with the highest value from this heap.
-   * Throws EmptyCollectionException if heap is empty.
    * Uses removeRoot() method of ArrayHeap.
    * @return the element with the highest value from this heap
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   @Override
   public T removeMax() throws EmptyCollectionException {
@@ -67,7 +66,7 @@ public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
    * Heapify down an element.
    * Until parent is higher or equal to children.
    * Uses recursion.
-   * @param parentIndex
+   * @param parentIndex index of element to heapifyDown
    */
   @Override
   protected void heapifyDown(int parentIndex){
@@ -140,10 +139,9 @@ public class ArrayMaxHeap<T> extends ArrayHeap<T> implements HeapMaxADT<T> {
   
   /**
    * Returns a reference to the element with the highest value in this heap.
-   * Throws EmptyCollectionException if heap is empty.
    * Uses findRoot() method of ArrayHeap.
    * @return a reference to the element with the highest value in this heap
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException heap is empty
    */
   @Override
   public T findMax() throws EmptyCollectionException {

@@ -8,9 +8,9 @@ package estg.ed.interfaces;
 import estg.ed.exceptions.ElementNotFoundException;
 
 /**
- *
+ * Contract for unordered list.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public interface UnorderedListADT<T> extends ListADT<T> {
   /**
@@ -29,7 +29,7 @@ public interface UnorderedListADT<T> extends ListADT<T> {
    * Adds the specified element after another element
    * @param element the element to be added to this list
    * @param target the target element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException element was not found
    */
   public void addAfter(T element, T target) throws ElementNotFoundException;
 }

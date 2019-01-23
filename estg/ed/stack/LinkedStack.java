@@ -12,7 +12,7 @@ import estg.ed.nodes.LinearNode;
 /**
  * Stack implemented with linked list.
  * Using already implemented linked list. * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public class LinkedStack<T> implements StackADT<T> {
 
@@ -53,9 +53,8 @@ public class LinkedStack<T> implements StackADT<T> {
   /** 
    * Removes and returns the top element from this stack.
    * Removes from first node after sentinel.
-   * Throws EmptyCollectionException if is empty.
    * @return T element removed from the top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
   @Override
   public T pop() throws EmptyCollectionException {
@@ -77,9 +76,8 @@ public class LinkedStack<T> implements StackADT<T> {
   /** 
    * Returns without removing the top element of this stack.
    * Returns from first node after sentinel.
-   * Throws EmptyCollectionException if is empty.
    * @return T element on top of the stack
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException stack is empty
    */
   @Override
   public T peek() throws EmptyCollectionException {

@@ -20,7 +20,7 @@ import java.util.Iterator;
  * Binary tree implementation with circular dynamic array.
  * Using already implemented circular dynamic array.
  * @author igu
- * @param <T>
+ * @param <T> generic
  */
 public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
   
@@ -38,7 +38,7 @@ public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
   
   /**
    * Instantiates a binary tree with root.
-   * @param root
+   * @param root first nood of tree
    */
   public ArrayBinaryTree(T root){
     this.array = new DynamicArrayCircular();
@@ -48,9 +48,8 @@ public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
   /**
    * Returns a reference to the root element.
    * Uses internal circular dynamic array get() method on first position.
-   * Throws EmptyCollectionException if root is null.
    * @return a reference to the root
-   * @throws estg.ed.exceptions.EmptyCollectionException
+   * @throws estg.ed.exceptions.EmptyCollectionException root is null
    */
   @Override
   public T getRoot() throws EmptyCollectionException {
@@ -93,10 +92,9 @@ public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
 
   /**
    * Returns a reference to the specified element if it is found in this binary tree.
-   * Throws ElementNotFoundException if the specified element is not found.
    * @param targetElement the element being sought in the tree
    * @return a reference to the specified element
-   * @throws estg.ed.exceptions.ElementNotFoundException
+   * @throws estg.ed.exceptions.ElementNotFoundException specified element is not found
    */
   @Override
   public T find(T targetElement) throws ElementNotFoundException {
@@ -113,9 +111,9 @@ public abstract class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
    * Search for targetElem in (sub)tree.
    * Uses recursion.
    * Uses internal circular dynamic array to get elements.
-   * @param targetElem
-   * @param currentIndex
-   * @return 
+   * @param targetElem element to find
+   * @param currentIndex index to start searching
+   * @return index of found element or -1 if not found
    */
   private int findElement(T targetElem, int currentIndex){
     //Search element
