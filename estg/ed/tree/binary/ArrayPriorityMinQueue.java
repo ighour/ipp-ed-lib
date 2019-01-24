@@ -62,5 +62,5 @@ public class ArrayPriorityMinQueue<T> extends ArrayMinHeap<PriorityQueueNode<T>>
     
     //Return data
     return node.data;
-  } 
+  }
 }

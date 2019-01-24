@@ -309,7 +309,7 @@ public class Network<T> extends BaseGraph<T> implements NetworkADT<T> {
     
     //Generate traversal priority min queue
     PriorityQueueADT<Integer> traversalQueue = new ArrayPriorityMinQueue<>();
-    
+
     //Generate visited boolean array
     boolean[] visited = new boolean[this.vertices.size()];
     for(int i = 0; i < visited.length; i++)
