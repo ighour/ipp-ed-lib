@@ -60,7 +60,7 @@ Some of the used abstract data types includes the following:
 ## Authors
 
 * **Célio Ighour** - *Owner* - [Ighour](https://github.com/ighour)
-* **Jorge Miguel Pinto Araújo** - *Owner*
+* **Jorge Miguel Pinto Araújo** - *Owner* - [Jorge](https://github.com/JorgeAraujo123)
 
 ## Notes
 
