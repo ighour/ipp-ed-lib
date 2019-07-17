@@ -43,7 +43,7 @@ Some of the used abstract data types includes the following:
 
 ## Files
 
-* [ADT Library](https://gitlab.com/ighour-learn/ipp/ed/project/uploads/59c2c302059d7b3f41c746c6bca923ae/ADT-Library.zip) - distribution of this repository and it's javadoc.
+* [ADT Library](/uploads/59c2c302059d7b3f41c746c6bca923ae/ADT-Library.zip) - distribution of this repository and it's javadoc.
 
 ## Built With
 
@@ -54,12 +54,12 @@ Some of the used abstract data types includes the following:
 
 * **Class Diagram**
 
-![Class Diagram](https://gitlab.com/ighour-learn/ipp/ed/project/uploads/ef30fd82f33ed6bd2a0fdde53c7ee950/CLASSES_-_SER%C3%81_DESTA___1_.png)
+![Class Diagram](/uploads/ef30fd82f33ed6bd2a0fdde53c7ee950/CLASSES_-_SER%C3%81_DESTA___1_.png)
 
 
 ## Authors
 
-* **Célio Ighour** - *Owner* - [My Portfolio](https://ighour.talosdev.com) | [Github](https://github.com/ighour) | [Gitlab](https://gitlab.com/ighour) | [LinkedIn](https://www.linkedin.com/in/c%C3%A9lio-ighour-de-castro-rodrigues-0a278a13a/) | [StackOverflow](https://stackexchange.com/users/10652400/ighour)
+* **Célio Ighour** - *Owner* - [My Portfolio](https://www.ighour.com) | [Github](https://github.com/ighour) | [Gitlab](https://gitlab.com/ighour) | [LinkedIn](https://www.linkedin.com/in/c%C3%A9lio-ighour-de-castro-rodrigues-0a278a13a/) | [StackOverflow](https://stackexchange.com/users/10652400/ighour)
 * **Jorge Miguel Pinto Araújo** - *Owner* - [Jorge](https://github.com/JorgeAraujo123)
 
 ## Notes
