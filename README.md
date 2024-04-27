@@ -1,23 +1,17 @@
-# Project
+# Project Library
 
-Project for IPP/ESTG Class "Estruturas de Dados"
+Project for [IPP/ESTG](https://www.estg.ipp.pt) course "Estruturas de Dados" (Data Structures)
 
-## Main Components
+## Repositories
 
-### **[Library](https://gitlab.com/ighour-learn/ipp/ed/adt-library)** - Own library of abstract data types to use in project. *(here)*
-### **[Project](https://gitlab.com/ighour-learn/ipp/ed/project)** - Project made using the library to construct a social network.
-
-*Detailed info about components is in their own repository.*
+### **[Library](https://github.com/ighour/ipp-ed-lib)** - Own library of abstract data types. *(here)*
+### **[Project](https://github.com/ighour/ipp-ed)** - Project made using the library to construct a social network.
 
 ## Objectives
 
-* The main purpose is to construct a social network which will receive an input with users data (json file), construct a network with them and enable it's management.
+* This repository contains abstract data types to be used in the project.
 
-* This repository contains abstract data types to use in project.
-
-## Abstract Data Types Used in Project
-
-Some of the used abstract data types includes the following:
+## Abstract Data Types
 
 * **DynamicArray** and **DynamicArrayCircular**: to easily manage arrays with automatic redimension when needed.
 
@@ -41,27 +35,7 @@ Some of the used abstract data types includes the following:
 
 * **Priority Min Queue**: a priority minimum queue.
 
-## Files
-
-* [ADT Library](/uploads/59c2c302059d7b3f41c746c6bca923ae/ADT-Library.zip) - distribution of this repository and it's javadoc.
-
 ## Built With
 
-* [Java](https://www.java.com/) - Programming language.
-* [NetBeans](https://netbeans.org/) - IDE.
-
-## Modelling
-
-* **Class Diagram**
-
-![Class Diagram](/uploads/ef30fd82f33ed6bd2a0fdde53c7ee950/CLASSES_-_SER%C3%81_DESTA___1_.png)
-
-
-## Authors
-
-* **Célio Ighour** - *Owner* - [My Portfolio](https://www.ighour.com) | [Github](https://github.com/ighour) | [Gitlab](https://gitlab.com/ighour) | [LinkedIn](https://www.linkedin.com/in/c%C3%A9lio-ighour-de-castro-rodrigues-0a278a13a/) | [StackOverflow](https://stackexchange.com/users/10652400/ighour)
-* **Jorge Miguel Pinto Araújo** - *Owner* - [Jorge](https://github.com/JorgeAraujo123)
-
-## Notes
-
-Check the repository of project to see more content, like screenshots, downloads, reports etc.
+* [Java](https://www.java.com/)
+* [NetBeans](https://netbeans.org/)
